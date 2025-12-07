@@ -188,9 +188,10 @@
 
 <!---------------- BOKNING ---------------->
 <section class="section" id="book">
-  <h2 class="section-title">Boka tid</h2>
+  <h2 class="section-title">Boka din behandling</h2>
 
- <div class="book-box">
+  <div class="book-box">
+
     <label>Månad</label>
     <select id="month">
         <option value="">Välj månad</option>
@@ -207,25 +208,29 @@
         <option value="11">November</option>
         <option value="12">December</option>
     </select>
-</div>
-
 
     <label>Dag</label>
-    <select id="day"><option value="">Välj dag</option></select>
+    <select id="day">
+        <option value="">Välj dag</option>
+    </select>
 
     <label>Tid</label>
-    <select id="start"><option value="">Välj tid</option></select>
+    <select id="start">
+        <option value="">Välj tid</option>
+    </select>
 
-    <label>Email</label>
-    <input id="customerEmail" type="email" placeholder="Din e-mail">
+    <label>E-mail</label>
+    <input id="customerEmail" type="email" placeholder="Skriv din e-mail">
 
     <label>Telefonnummer</label>
-    <input id="customerPhone" type="tel" placeholder="Ditt telefonnummer">
+    <input id="customerPhone" type="tel" placeholder="Skriv ditt nummer">
 
     <button id="finishBtn">Boka klart</button>
     <p id="doneMessage"></p>
+
   </div>
 </section>
+
 
 <footer>
   © <span id="year"></span> Keratin Queen Malmö
@@ -269,5 +274,6 @@
 
 </body>
 </html>
+
 
 
