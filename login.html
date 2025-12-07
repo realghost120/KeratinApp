@@ -1,75 +1,87 @@
 <!DOCTYPE html>
 <html lang="sv">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Login</title>
-    <style>
-        body {
-            background: #0d0d0d;
-            color: white;
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-        }
-        .box {
-            background: #1a1a1a;
-            padding: 30px;
-            border-radius: 10px;
-            width: 90%;
-            max-width: 350px;
-            text-align: center;
-        }
-        input {
-            width: 100%;
-            padding: 12px;
-            margin-top: 10px;
-            border-radius: 6px;
-            border: none;
-            background: #2a2a2a;
-            color: white;
-        }
-        button {
-            width: 100%;
-            margin-top: 15px;
-            padding: 12px;
-            background: #ffcc33;
-            border: none;
-            border-radius: 6px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-        p {
-            margin-top: 10px;
-            color: #ff4d4d;
-            font-weight: bold;
-        }
-    </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Admin Login</title>
+
+<style>
+  body {
+    background: #0d0d0d;
+    color: white;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+
+  .box {
+    background: #111;
+    padding: 35px;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 360px;
+    text-align: center;
+    box-shadow: 0 0 25px rgba(255, 204, 51, 0.1);
+  }
+
+  input {
+    width: 100%;
+    padding: 14px;
+    margin-top: 12px;
+    border-radius: 8px;
+    background: #222;
+    border: 1px solid #444;
+    color: white;
+    font-size: 16px;
+  }
+
+  button {
+    width: 100%;
+    padding: 14px;
+    background: #ffcc33;
+    border: none;
+    margin-top: 15px;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    color: black;
+    font-size: 16px;
+  }
+
+  .error {
+    margin-top: 10px;
+    color: red;
+    font-size: 14px;
+    display: none;
+  }
+</style>
 </head>
+
 <body>
 
 <div class="box">
-    <h2>Admin Login</h2>
+  <h2>Admin Login</h2>
 
-    <input type="password" id="pwd" placeholder="Lösenord">
-    <button onclick="login()">Logga in</button>
+  <input type="password" id="password" placeholder="Lösenord" />
 
-    <p id="msg"></p>
+  <button onclick="login()">Logga in</button>
+
+  <p id="errorMsg" class="error">Fel lösenord!</p>
 </div>
 
 <script>
 function login() {
-    const pwd = document.getElementById("pwd").value;
-    const msg = document.getElementById("msg");
+  const input = document.getElementById("password").value;
+  const correctPassword = "Keratin"; // 🔐 DITT LÖSENORD
 
-    if (pwd === "Queen2025") {
-        window.location.href = "admin.html";
-    } else {
-        msg.textContent = "Fel lösenord!";
-    }
+  if (input === correctPassword) {
+    window.location.href = "admin.html"; // Skicka till admin panel
+  } else {
+    document.getElementById("errorMsg").style.display = "block";
+  }
 }
 </script>
 
