@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="sv">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Keratin Queen – Bokning</title>
 
   <style>
@@ -20,25 +20,18 @@
       min-height: 100vh;
     }
 
-    /* Julbanner */
+    /* JULBANNER */
     .christmas-banner {
-      background: #d80000;
-      padding: 12px;
-      font-size: 18px;
+      background: #d40000;
       color: #fff;
+      font-size: 20px;
+      padding: 12px;
+      border-bottom: 3px solid gold;
       font-weight: bold;
-      border-bottom: 3px solid #ffcc33;
-      position: sticky;
-      top: 0;
-      z-index: 2000;
-      text-shadow: 0 0 5px #000;
+      text-shadow: 0 0 6px black;
     }
 
-    .christmas-banner span {
-      color: #ffea00;
-    }
-
-    /* Bakgrund */
+    /* Background */
     .bg-pattern {
       position: fixed;
       inset: 0;
@@ -46,18 +39,27 @@
       z-index: -2;
     }
 
-    /* NAV */
+    .bg-overlay {
+      position: fixed;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      opacity: 0.12;
+      z-index: -1;
+    }
+
     nav {
-      background: rgba(0, 0, 0, 0.9);
+      background: rgba(0, 0, 0, 0.85);
       padding: 15px 30px;
       display: flex;
       justify-content: center;
       gap: 35px;
       font-size: 18px;
       position: sticky;
-      top: 48px;
-      z-index: 1000;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      backdrop-filter: blur(10px);
     }
 
     nav a {
@@ -73,43 +75,63 @@
       left: 0;
       width: 0;
       height: 2px;
-      background: #ffcc33;
-      transition: width 0.3s;
+      background: gold;
+      transition: 0.3s;
     }
 
-    nav a:hover::after {
-      width: 100%;
+    nav a:hover::after { width: 100%; }
+
+    .section {
+      padding: 60px 20px;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 0.9s ease;
+    }
+    .section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .section-title {
+      font-size: 36px;
+      margin-bottom: 30px;
     }
 
     /* HERO */
     #hero {
-      padding: 80px 20px;
+      padding-top: 80px;
     }
 
     .hero-inner {
-      max-width: 1000px;
+      max-width: 900px;
       margin: auto;
       display: flex;
-      gap: 40px;
       flex-wrap: wrap;
-      justify-content: center;
       align-items: center;
+      justify-content: center;
+      gap: 40px;
     }
 
     .hero-logo {
-      width: 190px;
-      height: 190px;
+      width: 200px;
+      height: 200px;
       border-radius: 50%;
-      border: 4px solid #ffcc33;
-      background: #222;
+      border: 4px solid gold;
+      overflow: hidden;
+      background: black;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 70px;
+    }
+
+    .hero-logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
 
     .hero-text {
-      max-width: 520px;
+      max-width: 500px;
       text-align: left;
     }
 
@@ -118,189 +140,110 @@
       margin-bottom: 10px;
     }
 
-    .hero-badge {
-      margin-top: 10px;
-      padding: 6px 14px;
-      border-radius: 999px;
-      border: 1px solid #ffcc33;
-      font-size: 14px;
-    }
-
-    /* RUBRIKER */
-    .section {
-      padding: 60px 20px;
-    }
-
-    .section-title {
-      font-size: 36px;
-      margin-bottom: 30px;
-    }
-
-    .section-title span {
-      background: #d80000;
-      padding: 6px 18px;
-      border-radius: 999px;
-      border: 2px solid #ffcc33;
-    }
-
-    /* ERBJUDANDEN */
-    #offers .cards {
-      max-width: 1100px;
-      margin: auto;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 25px;
-    }
-
-    .offer-card {
-      background: rgba(0, 0, 0, 0.85);
-      border-radius: 18px;
-      padding: 35px 20px;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-    }
-
-    .offer-label {
-      color: #ffcc33;
-      text-transform: uppercase;
-      margin-bottom: 10px;
-    }
-
     /* BOKNING */
-    #book .box {
-      max-width: 520px;
+    .box {
+      max-width: 500px;
+      background: rgba(0,0,0,0.85);
       margin: auto;
       padding: 25px;
-      background: rgba(0, 0, 0, 0.88);
-      border-radius: 18px;
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.1);
+      box-shadow: 0 0 20px black;
     }
 
-    input,
-    select {
+    select, input {
       width: 100%;
-      margin-bottom: 10px;
       padding: 12px;
-      border-radius: 10px;
+      margin-bottom: 10px;
+      border-radius: 12px;
       border: none;
-      background: #222;
-      color: #fff;
+      background: #1a1a1a;
+      color: white;
+      font-size: 16px;
     }
 
     button {
       width: 100%;
-      padding: 13px;
-      font-size: 16px;
-      background: linear-gradient(135deg, #ffcc33, #ffb300);
-      border: none;
-      border-radius: 999px;
-      cursor: pointer;
-      margin-top: 10px;
-    }
-
-    /* SOCIAL MEDIA */
-    #social .social-grid {
-      max-width: 900px;
-      margin: auto;
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 30px;
-    }
-
-    .social-card {
-      padding: 40px;
-      background: rgba(20, 20, 20, 0.9);
+      padding: 12px;
       border-radius: 20px;
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      border: none;
+      background: gold;
+      color: black;
+      font-weight: bold;
+      font-size: 18px;
+      cursor: pointer;
     }
 
-    /* FOOTER */
-    footer {
-      padding: 20px;
-      background: rgba(0, 0, 0, 0.8);
-      margin-top: 40px;
+    #doneMessage {
+      margin-top: 10px;
+      font-weight: bold;
     }
+    #doneMessage.error { color: #ff4444; }
+
   </style>
 </head>
 
 <body>
 
-<div class="christmas-banner">
-  🎄 <span>20% Julrabatt</span> på alla behandlingar – Gäller t.o.m 24 december! 🎁
-</div>
+<div class="christmas-banner">🎄 20% Julrabatt på alla behandlingar – Gäller t.o.m 24 december! 🎅</div>
 
 <div class="bg-pattern"></div>
 
 <nav>
   <a href="#hero">Hem</a>
-  <a href="#offers">Tjänster</a>
   <a href="#book">Boka</a>
-  <a href="#social">Social Media</a>
   <a href="#contact">Kontakt</a>
 </nav>
 
+<!-- HERO -->
 <section class="section" id="hero">
   <div class="hero-inner">
-    <div class="hero-logo">💇‍♀️</div>
+
+    <div class="hero-logo">
+      <img src="https://png.pngtree.com/png-clipart/20240718/original/pngtree-gold-gradient-womens-hair-salon-logo-design-png-image_15583665.png">
+    </div>
 
     <div class="hero-text">
       <h1>Keratin Queen Malmö</h1>
-      <p>
-        Permanent keratin- & proteinbehandling för dig som vill ha
-        rakt, glansigt och friskt hår – utan friss.
-      </p>
-      <div class="hero-badge">✨ 100% fokus på kvalitet & resultat</div>
+      <p>Lyxig keratin- & proteinbehandling för glansigt, friskt och rakt hår.</p>
     </div>
+
   </div>
 </section>
 
-<section class="section" id="offers">
-  <h2 class="section-title"><span>Erbjudanden</span></h2>
-
-  <div class="cards">
-    <div class="offer-card">
-      <div class="offer-label">JULRABATT 20%</div>
-      <h3>Keratin behandling</h3>
-      <p>Glansigt och friskt hår med protein & keratin.</p>
-    </div>
-
-    <div class="offer-card">
-      <div class="offer-label">JULRABATT 20%</div>
-      <h3>Klippning</h3>
-      <p>Fräsch och personlig klippning för din stil.</p>
-    </div>
-
-    <div class="offer-card">
-      <div class="offer-label">JULRABATT 20%</div>
-      <h3>Färgning</h3>
-      <p>Skonsam färgning med fokus på glans och kvalitet.</p>
-    </div>
-  </div>
-</section>
-
+<!-- BOKNING -->
 <section class="section" id="book">
-  <h2 class="section-title"><span>Boka tid</span></h2>
+  <h2 class="section-title">Boka tid</h2>
 
   <div class="box">
-    <h2>Boka din behandling</h2>
-
     <label>Månad</label>
     <select id="month">
-      <option value="">Välj</option>
-      <option value="12">December</option>
+      <option value="">--Välj--</option>
       <option value="01">Januari</option>
+      <option value="02">Februari</option>
+      <option value="03">Mars</option>
+      <option value="04">April</option>
+      <option value="05">Maj</option>
+      <option value="06">Juni</option>
+      <option value="07">Juli</option>
+      <option value="08">Augusti</option>
+      <option value="09">September</option>
+      <option value="10">Oktober</option>
+      <option value="11">November</option>
+      <option value="12">December</option>
     </select>
 
     <label>Dag</label>
-    <select id="day"></select>
+    <select id="day"><option value="">--Välj--</option></select>
 
     <label>Tid</label>
-    <select id="start"></select>
+    <select id="start"><option value="">--Välj--</option></select>
 
     <label>E-mail</label>
-    <input id="customerEmail" type="email" placeholder="Skriv din e-mail">
+    <input type="email" id="customerEmail">
 
     <label>Telefonnummer</label>
-    <input id="customerPhone" type="tel" placeholder="Skriv ditt nummer">
+    <input type="tel" id="customerPhone">
 
     <button id="finishBtn">Boka klart</button>
 
@@ -308,46 +251,90 @@
   </div>
 </section>
 
-<section class="section" id="social">
-  <h2 class="section-title"><span>Social media</span></h2>
-
-  <div class="social-grid">
-    <div class="social-card">
-      <h3>Instagram</h3>
-      <p>@Keratin_protein_malmo</p>
-    </div>
-
-    <div class="social-card">
-      <h3>TikTok</h3>
-      <p>@Keratin-protein-malmo</p>
-    </div>
-  </div>
-</section>
-
+<!-- KONTAKT -->
 <section class="section" id="contact">
-  <h2 class="section-title"><span>Kontakt</span></h2>
-  <p>Adress meddelas vid bokning.</p>
+  <h2 class="section-title">Kontakt</h2>
+  <p>Keratin Queen Malmö</p>
+  <p>Skriv till oss på Instagram eller TikTok.</p>
 </section>
 
-<footer>
-  © <span id="year"></span> Keratin Queen – Alla rättigheter förbehållna.
+<footer style="margin-top:50px; padding:15px; background:#000;">
+  © <span id="year"></span> Keratin Queen Malmö
 </footer>
 
 <script>
   document.getElementById("year").textContent = new Date().getFullYear();
 
+  const monthSelect = document.getElementById("month");
   const daySelect = document.getElementById("day");
+  const timeSelect = document.getElementById("start");
+  const msg = document.getElementById("doneMessage");
+
   for (let i = 1; i <= 31; i++) {
-    let d = i < 10 ? "0" + i : i;
+    const d = i < 10 ? "0" + i : i;
     daySelect.innerHTML += `<option value="${d}">${d}</option>`;
   }
 
+  function loadTimes() {
+    if (!monthSelect.value || !daySelect.value) return;
+
+    timeSelect.innerHTML = '<option value="">--Välj--</option>';
+
+    const hours = ["10:00", "14:00", "17:00"];
+    hours.forEach(t => {
+      timeSelect.innerHTML += `<option value="${t}">${t}</option>`;
+    });
+  }
+
+  monthSelect.addEventListener("change", loadTimes);
+  daySelect.addEventListener("change", loadTimes);
+
   document.getElementById("finishBtn").addEventListener("click", () => {
-    document.getElementById("doneMessage").textContent =
-      "✔ Bokning skickad!";
+    const month = monthSelect.value;
+    const day = daySelect.value;
+    const time = timeSelect.value;
+    const email = document.getElementById("customerEmail").value;
+    const phone = document.getElementById("customerPhone").value;
+
+    msg.textContent = "";
+    msg.classList.remove("error");
+
+    if (!month || !day || !time || !email || !phone) {
+      msg.textContent = "Vänligen fyll i alla fält!";
+      msg.classList.add("error");
+      return;
+    }
+
+    fetch("https://keratin-server.onrender.com/book", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        date: `${day}/${month}`,
+        time,
+        email,
+        phone
+      })
+    })
+    .then(res => res.json())
+    .then(data => {
+      if (data.success) msg.textContent = "✔ Bokning skickad!";
+      else if (data.error === "Tid upptagen") {
+        msg.textContent = "❌ Denna tid är redan bokad!";
+        msg.classList.add("error");
+      } else {
+        msg.textContent = "❌ Ett fel uppstod.";
+        msg.classList.add("error");
+      }
+    })
+    .catch(() => {
+      msg.textContent = "❌ Kunde inte kontakta servern.";
+      msg.classList.add("error");
+    });
   });
 </script>
 
 </body>
 </html>
+
+
 
