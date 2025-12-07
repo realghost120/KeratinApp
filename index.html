@@ -18,9 +18,45 @@
       color: #fff;
       text-align: center;
       min-height: 100vh;
+      overflow-x: hidden;
     }
 
-    /* Bakgrund liknande dina bilder */
+    /* 🎄 JULBANNER */
+    .xmas-banner {
+      width: 100%;
+      background: linear-gradient(90deg, #b30000, #ff1a1a);
+      padding: 12px;
+      color: #fff;
+      font-size: 18px;
+      font-weight: bold;
+      letter-spacing: 0.5px;
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      border-bottom: 2px solid gold;
+      text-shadow: 0 0 6px rgba(255,255,255,0.6);
+    }
+
+    /* ❄ SNÖFALL */
+    .snow {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 5;
+      background-image: url("https://i.imgur.com/5L6dG6s.png");
+      animation: snow 18s linear infinite;
+      opacity: 0.25;
+    }
+
+    @keyframes snow {
+      0% { background-position: 0 0; }
+      100% { background-position: 0 1000px; }
+    }
+
+    /* Bakgrund */
     .bg-pattern {
       position: fixed;
       inset: 0;
@@ -31,7 +67,7 @@
     .bg-overlay {
       position: fixed;
       inset: 0;
-      background-image: url("header.jpg"); /* byt till din polygon-bild om du vill */
+      background-image: url("header.jpg");
       background-size: cover;
       background-position: center;
       opacity: 0.15;
@@ -47,7 +83,7 @@
       gap: 35px;
       font-size: 18px;
       position: sticky;
-      top: 0;
+      top: 48px;
       z-index: 100;
       backdrop-filter: blur(10px);
       border-bottom: 1px solid rgba(255,255,255,0.08);
@@ -67,7 +103,7 @@
       bottom: -5px;
       width: 0;
       height: 2px;
-      background: #ffcc33;
+      background: gold;
       transition: width 0.3s;
     }
 
@@ -75,7 +111,7 @@
       width: 100%;
     }
 
-    /* GENERELL LAYOUT */
+    /* SECTIONS */
     .section {
       padding: 60px 20px;
       opacity: 0;
@@ -96,14 +132,16 @@
     }
 
     .section-title span {
-      background: #0d47a1;
+      background: linear-gradient(90deg, #b30000, #ff1a1a);
       padding: 6px 18px;
       border-radius: 999px;
+      color: #fff;
+      border: 1px solid gold;
     }
 
-    /* HERO / TOPPSEKTION */
+    /* HERO */
     #hero {
-      padding-top: 80px;
+      padding-top: 100px;
       padding-bottom: 80px;
     }
 
@@ -121,12 +159,13 @@
       width: 190px;
       height: 190px;
       border-radius: 50%;
-      border: 4px solid #ffcc33;
+      border: 5px solid gold;
       background: #222;
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 70px;
+      box-shadow: 0 0 15px gold;
     }
 
     .hero-text {
@@ -137,26 +176,21 @@
     .hero-text h1 {
       font-size: 38px;
       margin-bottom: 10px;
-    }
-
-    .hero-text p {
-      font-size: 18px;
-      line-height: 1.6;
-      color: #ddd;
-      margin-bottom: 15px;
+      color: gold;
+      text-shadow: 0 0 10px rgba(255,215,0,0.7);
     }
 
     .hero-badge {
-      display: inline-block;
       margin-top: 10px;
       padding: 6px 14px;
       border-radius: 999px;
-      border: 1px solid #ffcc33;
+      border: 1px solid gold;
       font-size: 14px;
-      letter-spacing: 0.5px;
+      background: rgba(255,215,0,0.15);
+      color: gold;
     }
 
-    /* ERBJUDANDEN – 3 rutor som i din bild */
+    /* OFFER CARDS */
     #offers .cards {
       max-width: 1100px;
       margin: 0 auto;
@@ -174,178 +208,47 @@
     }
 
     .offer-label {
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      color: #ffcc33;
+      color: gold;
       font-size: 14px;
+      text-transform: uppercase;
       margin-bottom: 10px;
+      letter-spacing: 1.5px;
     }
 
-    .offer-title {
-      font-size: 26px;
-      font-weight: bold;
-      margin-bottom: 10px;
-    }
-
-    .offer-text {
-      font-size: 15px;
-      color: #ddd;
-    }
-
-    /* BOKNING – snygg box mitt på sidan */
+    /* BOOKING */
     #book .box {
       max-width: 520px;
       margin: 0 auto;
-      background: rgba(0, 0, 0, 0.88);
-      padding: 25px 24px 30px;
+      background: rgba(0, 0, 0, 0.9);
+      padding: 25px;
       border-radius: 18px;
       border: 1px solid rgba(255,255,255,0.08);
       box-shadow: 0 18px 40px rgba(0,0,0,0.8);
-      text-align: left;
-    }
-
-    #book h2 {
-      text-align: center;
-      margin-bottom: 15px;
-      font-size: 26px;
-    }
-
-    label {
-      display: block;
-      font-size: 14px;
-      margin-top: 8px;
-      margin-bottom: 4px;
-      color: #ddd;
-    }
-
-    select,
-    input {
-      width: 100%;
-      padding: 11px;
-      margin-bottom: 6px;
-      border: none;
-      border-radius: 10px;
-      font-size: 15px;
-      background: #1f1f1f;
-      color: #fff;
-      outline: none;
     }
 
     button {
-      width: 100%;
-      padding: 13px;
-      margin-top: 10px;
-      border: none;
-      border-radius: 999px;
-      font-size: 16px;
-      font-weight: bold;
-      background: linear-gradient(135deg,#ffcc33,#ffb300);
+      background: linear-gradient(135deg, gold, #e6b800);
       color: #000;
-      cursor: pointer;
+      font-weight: bold;
       box-shadow: 0 10px 25px rgba(0,0,0,0.7);
-      transition: transform 0.1s ease, box-shadow 0.1s ease, background 0.2s;
     }
 
     button:hover {
-      background: linear-gradient(135deg,#ffd54f,#ffca28);
-      transform: translateY(-1px);
-      box-shadow: 0 12px 30px rgba(0,0,0,0.9);
+      background: linear-gradient(135deg, #ffe066, #ffcc00);
     }
 
-    #doneMessage {
-      font-size: 16px;
-      margin-top: 12px;
-      font-weight: bold;
-      color: #00e676;
-      text-align: center;
-    }
-
-    #doneMessage.error {
-      color: #ff5252;
-    }
-
-    /* SOCIAL MEDIA – liknar din “Social media”-bild */
-    #social .social-grid {
-      max-width: 1100px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 30px;
-    }
-
-    .social-card {
-      background: rgba(0, 0, 0, 0.85);
-      border-radius: 22px;
-      padding: 35px 25px 30px;
-      border: 1px solid rgba(255,255,255,0.08);
-      box-shadow: 0 18px 45px rgba(0,0,0,0.85);
-    }
-
-    .social-icon {
-      width: 100px;
-      height: 100px;
-      border-radius: 50%;
-      background: #111;
-      border: 3px solid #fff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 46px;
-      margin: 0 auto 18px;
-    }
-
-    .social-title {
-      font-size: 26px;
-      margin-bottom: 5px;
-    }
-
-    .social-handle {
-      font-size: 18px;
-      margin-bottom: 10px;
-    }
-
-    .social-label {
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-      color: #ffcc33;
-      font-size: 14px;
-      margin-top: 8px;
-      margin-bottom: 6px;
-    }
-
-    .social-text {
-      font-size: 14px;
-      color: #ddd;
-      max-width: 380px;
-      margin: 0 auto;
-      line-height: 1.6;
-    }
-
-    /* KONTAKT / FOOTER */
-    #contact .contact-inner {
-      max-width: 800px;
-      margin: 0 auto;
-      font-size: 15px;
-      color: #ddd;
-      line-height: 1.7;
-    }
-
+    /* FOOTER */
     footer {
       margin-top: 40px;
       padding: 18px 10px;
-      font-size: 13px;
-      color: #aaa;
-      border-top: 1px solid rgba(255,255,255,0.08);
       background: rgba(0,0,0,0.8);
+      border-top: 1px solid gold;
+      color: #ddd;
     }
 
-    /* RESPONSIVT */
+    /* MOBILE */
     @media (max-width: 900px) {
       #offers .cards {
-        grid-template-columns: 1fr;
-      }
-
-      #social .social-grid {
         grid-template-columns: 1fr;
       }
 
@@ -362,6 +265,9 @@
 </head>
 <body>
 
+<div class="xmas-banner">🎄 20% Julrabatt på alla behandlingar – Gäller t.o.m 24 december! 🎁</div>
+<div class="snow"></div>
+
 <div class="bg-pattern"></div>
 <div class="bg-overlay"></div>
 
@@ -376,60 +282,47 @@
 <!-- HERO -->
 <section class="section" id="hero">
   <div class="hero-inner">
-    <div class="hero-logo">
-      <!-- ersätt gärna med riktig logga-bild -->
-      💇‍♀️
-    </div>
+    <div class="hero-logo">💇‍♀️</div>
 
     <div class="hero-text">
       <h1>Keratin Queen Malmö</h1>
       <p>
-        Permanent keratin- & proteinbehandling för dig som vill ha
-        rakt, glansigt och friskt hår – utan friss. Boka din tid och
-        låt oss ta hand om ditt hår som en drottning.
+        Permanent keratin- & proteinbehandling för rakt, glansigt och friskt hår.  
+        Boka din tid och låt oss ta hand om ditt hår som en drottning.
       </p>
-      <div class="hero-badge">
-        ✨ 100% fokus på kvalitet & resultat
-      </div>
+      <div class="hero-badge">✨ Julkampanj – 20% Rabatt</div>
     </div>
   </div>
 </section>
 
-<!-- ERBJUDANDEN -->
+<!-- OFFERS -->
 <section class="section" id="offers">
   <h2 class="section-title"><span>Erbjudanden</span></h2>
 
   <div class="cards">
     <div class="offer-card">
-      <div class="offer-label">Erbjudande</div>
+      <div class="offer-label">Julrabatt 20%</div>
       <div class="offer-title">Keratin protein behandling</div>
       <p class="offer-text">
-        Permanent utjämnande behandling med keratin, protein och vitaminer
-        för extra glans, styrka och följsamt hår.
+        Permanent utjämnande behandling med keratin, protein och vitaminer.
       </p>
     </div>
 
     <div class="offer-card">
-      <div class="offer-label">Erbjudande</div>
+      <div class="offer-label">Julrabatt 20%</div>
       <div class="offer-title">Klippning</div>
-      <p class="offer-text">
-        Fräsch klippning som passar din hårtyp och stil – från toppning
-        till helt ny look.
-      </p>
+      <p class="offer-text">Fräsch klippning som passar din stil.</p>
     </div>
 
     <div class="offer-card">
-      <div class="offer-label">Erbjudande</div>
-      <div class="offer-title">Färga</div>
-      <p class="offer-text">
-        Färg, toning eller slingor med skonsamma produkter för maximal
-        glans och minimalt slitage.
-      </p>
+      <div class="offer-label">Julrabatt 20%</div>
+      <div class="offer-title">Färgning</div>
+      <p class="offer-text">Färg, toning och slingor med skonsamma produkter.</p>
     </div>
   </div>
 </section>
 
-<!-- BOKNING -->
+<!-- BOOKING -->
 <section class="section" id="book">
   <h2 class="section-title"><span>Boka tid</span></h2>
 
@@ -454,14 +347,10 @@
     </select>
 
     <label>Välj dag</label>
-    <select id="day">
-      <option value="">--Välj--</option>
-    </select>
+    <select id="day"><option value="">--Välj--</option></select>
 
     <label>Välj tid</label>
-    <select id="start">
-      <option value="">--Välj--</option>
-    </select>
+    <select id="start"><option value="">--Välj--</option></select>
 
     <label>E-mail</label>
     <input type="email" id="customerEmail" placeholder="Skriv din e-mail">
@@ -470,48 +359,36 @@
     <input type="tel" id="customerPhone" placeholder="Skriv ditt telefonnummer">
 
     <button id="finishBtn">Boka klart</button>
-
     <p id="doneMessage"></p>
   </div>
 </section>
 
-<!-- SOCIAL MEDIA -->
+<!-- SOCIAL -->
 <section class="section" id="social">
   <h2 class="section-title"><span>Social media</span></h2>
 
   <div class="social-grid">
     <div class="social-card">
       <div class="social-icon">📷</div>
-      <div class="social-title">Kontakta oss via Instagram</div>
+      <div class="social-title">Instagram</div>
       <div class="social-handle">@Keratin_protein_malmo</div>
-      <div class="social-label">Om oss</div>
-      <p class="social-text">
-        Följ våra resultat, se före/efter-bilder och skriv DM om du vill
-        ställa frågor innan du bokar.
-      </p>
     </div>
 
     <div class="social-card">
       <div class="social-icon">🎵</div>
-      <div class="social-title">Kontakta oss via TikTok</div>
+      <div class="social-title">TikTok</div>
       <div class="social-handle">@Keratin-protein-malmo</div>
-      <div class="social-label">Öppettider</div>
-      <p class="social-text">
-        Lördag och söndag – perfekt för dig som vill bli fin inför helgen.
-        Boka tid via hemsidan eller skriv till oss i DM.
-      </p>
     </div>
   </div>
 </section>
 
-<!-- KONTAKT -->
+<!-- CONTACT -->
 <section class="section" id="contact">
   <h2 class="section-title"><span>Kontakt</span></h2>
 
   <div class="contact-inner">
     <p><strong>Keratin Queen Malmö</strong></p>
-    <p>Malmö – exakt adress meddelas vid bokning.</p>
-    <p>Har du frågor? Kontakta oss via Instagram eller TikTok.</p>
+    <p>Malmö – adress ges vid bokning.</p>
   </div>
 </section>
 
@@ -520,10 +397,8 @@
 </footer>
 
 <script>
-  // År i footer
   document.getElementById("year").textContent = new Date().getFullYear();
 
-  // Scroll animation
   const sections = document.querySelectorAll('.section');
   const reveal = () => {
     sections.forEach(s => {
@@ -535,25 +410,23 @@
   window.addEventListener('scroll', reveal);
   window.addEventListener('load', reveal);
 
-  // Fyll dag-val 01–31
+  // Fyll dagar
   const daySelect = document.getElementById("day");
   for (let i = 1; i <= 31; i++) {
-    const d = i < 10 ? "0" + i : "" + i;
+    const d = i < 10 ? "0" + i : i;
     daySelect.innerHTML += `<option value="${d}">${d}</option>`;
   }
 
-  // Tider – samma varje dag
   function loadTimes() {
-    let month = document.getElementById("month").value;
-    let day = document.getElementById("day").value;
-    let select = document.getElementById("start");
+    const month = document.getElementById("month").value;
+    const day = document.getElementById("day").value;
+    const select = document.getElementById("start");
 
     select.innerHTML = '<option value="">--Välj--</option>';
 
     if (!month || !day) return;
 
-    const hours = ["10:00", "14:00", "17:00"];
-    hours.forEach(t => {
+    ["10:00", "14:00", "17:00"].forEach(t => {
       select.innerHTML += `<option value="${t}">${t}</option>`;
     });
   }
@@ -561,7 +434,7 @@
   document.getElementById("month").addEventListener("change", loadTimes);
   document.getElementById("day").addEventListener("change", loadTimes);
 
-  // Skicka bokning till servern
+  // Skicka bokning
   document.getElementById("finishBtn").addEventListener("click", () => {
     const month = document.getElementById("month").value;
     const day = document.getElementById("day").value;
@@ -570,44 +443,28 @@
     const phone = document.getElementById("customerPhone").value;
     const msg = document.getElementById("doneMessage");
 
-    msg.classList.remove("error");
-    msg.textContent = "";
-
     if (!month || !day || !time || !email || !phone) {
       msg.textContent = "Vänligen fyll i alla fält!";
-      msg.classList.add("error");
+      msg.className = "error";
       return;
     }
 
     fetch("https://keratin-server.onrender.com/book", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        date: `${day}/${month}`,
-        time,
-        email,
-        phone
-      })
+      body: JSON.stringify({ date: `${day}/${month}`, time, email, phone })
     })
     .then(res => res.json())
     .then(data => {
-      if (data.success) {
-        msg.textContent = "✔ Bokning skickad!";
-      } else if (data.error === "Tid upptagen") {
-        msg.textContent = "❌ Denna tid är redan bokad!";
-        msg.classList.add("error");
-      } else {
-        msg.textContent = "❌ Ett fel uppstod. Kontrollera servern.";
-        msg.classList.add("error");
-      }
+      if (data.success) msg.textContent = "✔ Bokning skickad!";
+      else if (data.error === "Tid upptagen") msg.textContent = "❌ Tiden är redan bokad!";
+      else msg.textContent = "❌ Ett fel uppstod.";
     })
     .catch(() => {
       msg.textContent = "❌ Kunde inte kontakta servern.";
-      msg.classList.add("error");
     });
   });
 </script>
 
 </body>
 </html>
-
