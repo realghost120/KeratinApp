@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title> Admin – Bokningar</title>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #111;
+        margin: 0;
+        padding: 0;
+        color: #fff;
+    }
+
+    h1 {
+        text-align: center;
+        padding: 20px;
+        background: #181818;
+        margin: 0;
+        font-size: 28px;
+        border-bottom: 1px solid #333;
+    }
+
+    .top-bar {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        padding: 15px;
+        background: #1c1c1c;
+        border-bottom: 1px solid #333;
+    }
+
+    input, select {
+        padding: 10px;
+        background: #222;
+        border: 1px solid #444;
+        color: white;
+        border-radius: 6px;
+        min-width: 200px;
+    }
+
+    table {
+        width: 95%;
+        margin: 25px auto;
+        border-collapse: collapse;
+        background: #1c1c1c;
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+    th, td {
+        padding: 14px;
+        border-bottom: 1px solid #333;
+        text-align: left;
+    }
+
+    th {
+        background: #222;
+    }
+
+    tr:hover {
+        background: #292929;
+        cursor: pointer;
+    }
+
+    .btn-delete {
+        background: #ff3b3b;
+        padding: 7px 14px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        color: white;
+        font-weight: bold;
+    }
+
+    .btn-delete:hover {
+        background: #cc0000;
+    }
+
+    /* Popup */
+    .popup-bg {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,0.7);
+        justify-content: center;
+        align-items: center;
+    }
+
+    .popup {
+        background: #222;
+        padding: 25px;
+        border-radius: 12px;
+        width: 90%;
+        max-width: 400px;
+        text-align: center;
+    }
+
+    .popup button {
+        margin-top: 15px;
+        padding: 10px 20px;
+        border: none;
+        background: #ffcc33;
+        font-weight: bold;
+        border-radius: 6px;
+        cursor: pointer;
+        color: black;
+    }
+</style>
+</head>
+<body>
+
+<h1>Admin – Bokningar</h1>
+
+<div class="top-bar">
+    <input type="text" id="search" placeholder="Sök (email, telefon, datum)">
+    <select id="filter">
+        <option value="all">Alla bokningar</option>
+        <option value="future">Endast framtida</option>
+    </select>
+</div>
+
+<table>
+    <thead>
+        <tr>
+            <th>Datum</th>
+            <th>Tid</th>
+            <th>Email</th>
+            <th>Telefon</th>
+            <th>Ta bort</th>
+        </tr>
+    </thead>
+    <tbody id="bookingTable"></tbody>
+</table>
+
+<!-- POPUP -->
+<div class="popup-bg" id="popupBg">
+    <div class="popup" id="popupBox">
+        <h3 id="popupTitle"></h3>
+        <p id="popupText"></p>
+        <button onclick="closePopup()">Stäng</button>
+    </div>
+</div>
+
+<script>
+async function loadBookings() {
+    const res = await fetch("http://localhost:3000/admin/bookings");
+    bookings = await res.json();
+    renderTable();
+}
+
+function renderTable() {
+    const table = document.getElementById("bookingTable");
+    const search = document.getElementById("search").value.toLowerCase();
+    const filter = document.getElementById("filter").value;
+
+    table.innerHTML = "";
+
+    bookings
+        .map((b, i) => ({ ...b, id: i }))
+        .filter(b => 
+            b.email.toLowerCase().includes(search) ||
+            b.phone.includes(search) ||
+            b.date.includes(search)
+        )
+        .filter(b => {
+            if (filter === "future") {
+                return isFuture(b.date);
+            }
+            return true;
+        })
+        .forEach(b => {
+            const row = document.createElement("tr");
+
+            row.innerHTML = `
+                <td>${b.date}</td>
+                <td>${b.time}</td>
+                <td>${b.email}</td>
+                <td>${b.phone}</td>
+                <td><button class="btn-delete" onclick="deleteBooking(${b.id})">X</button></td>
+            `;
+
+            row.addEventListener("click", () => showPopup(b));
+            table.appendChild(row);
+        });
+}
+
+function isFuture(dateStr) {
+    const [day, month] = dateStr.split("/").map(Number);
+    const bookingDate = new Date(2025, month - 1, day);
+    return bookingDate > new Date();
+}
+
+function showPopup(b) {
+    document.getElementById("popupTitle").textContent = "Bokningsdetaljer";
+    document.getElementById("popupText").innerHTML = `
+        <b>Datum:</b> ${b.date}<br>
+        <b>Tid:</b> ${b.time}<br>
+        <b>Email:</b> ${b.email}<br>
+        <b>Telefon:</b> ${b.phone}<br>
+    `;
+    document.getElementById("popupBg").style.display = "flex";
+}
+
+function closePopup() {
+    document.getElementById("popupBg").style.display = "none";
+}
+
+async function deleteBooking(id) {
+    if (!confirm("Är du säker att du vill ta bort bokningen?")) return;
+
+    await fetch(`http://localhost:3000/admin/delete/${id}`, { method: "DELETE" });
+    loadBookings();
+}
+
+document.getElementById("search").addEventListener("input", renderTable);
+document.getElementById("filter").addEventListener("change", renderTable);
+
+let bookings = [];
+loadBookings();
+</script>
+
+</body>
+</html>
