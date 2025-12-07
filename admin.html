@@ -26,7 +26,6 @@
       padding: 14px 16px 32px;
     }
 
-    /* TOP BAR */
     .top-bar {
       display: flex;
       align-items: center;
@@ -82,7 +81,6 @@
       letter-spacing: 0.12em;
     }
 
-    /* STATS ROW */
     .stats-row {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -134,7 +132,6 @@
       color: #ef9a9a;
     }
 
-    /* FILTER BAR */
     .filter-bar {
       display: flex;
       flex-wrap: wrap;
@@ -198,7 +195,6 @@
       font-size: 14px;
     }
 
-    /* TABLE WRAPPER */
     .table-wrapper {
       margin-top: 8px;
       background: rgba(6, 6, 15, 0.96);
@@ -273,7 +269,6 @@
       overflow-x: auto;
     }
 
-    /* POPUP */
     .popup-bg {
       display: none;
       position: fixed;
@@ -317,7 +312,6 @@
       color: #000;
     }
 
-    /* FOOTNOTE */
     .footnote {
       margin-top: 10px;
       font-size: 11px;
@@ -325,7 +319,6 @@
       text-align: right;
     }
 
-    /* MOBILE */
     @media (max-width: 780px) {
       .page {
         padding-inline: 10px;
@@ -365,7 +358,6 @@
 </head>
 <body>
   <div class="page">
-    <!-- TOP BAR -->
     <div class="top-bar">
       <div class="brand">
         <div class="brand-logo">KQ</div>
@@ -374,13 +366,13 @@
           <div class="brand-text-sub">Keratin Queen Malmö</div>
         </div>
       </div>
+
       <div class="top-right">
-        <div class="top-right-small">Inloggad som admin</div>
-        <div class="top-right-badge">Endast för administratör</div>
+        <div class="top-right-small">Adminpanel</div>
+        <div class="top-right-badge">Öppen åtkomst (ingen inloggning)</div>
       </div>
     </div>
 
-    <!-- STATS -->
     <div class="stats-row">
       <div class="card-stat">
         <div class="stat-label">Totalt</div>
@@ -401,15 +393,10 @@
       </div>
     </div>
 
-    <!-- FILTERBAR -->
     <div class="filter-bar">
       <div class="filter-bar-left">
         <span>🔍</span>
-        <input
-          id="search"
-          type="text"
-          placeholder="Sök (datum, email, telefon)"
-        />
+        <input id="search" type="text" placeholder="Sök (datum, email, telefon)" />
       </div>
 
       <select id="filter" class="filter-select">
@@ -423,7 +410,6 @@
       </button>
     </div>
 
-    <!-- TABELL -->
     <div class="table-wrapper">
       <div class="table-scroll">
         <table>
@@ -438,21 +424,20 @@
           </thead>
           <tbody id="bookingTable">
             <tr>
-              <td colspan="5" class="empty-row">
-                Hämtar bokningar...
-              </td>
+              <td colspan="5" class="empty-row">Hämtar bokningar...</td>
             </tr>
           </tbody>
         </table>
       </div>
     </div>
 
-    <div class="footnote">Senast uppdaterad: <span id="lastUpdated">–</span></div>
+    <div class="footnote">
+      Senast uppdaterad: <span id="lastUpdated">–</span>
+    </div>
   </div>
 
-  <!-- POPUP -->
   <div class="popup-bg" id="popupBg">
-    <div class="popup" id="popupBox">
+    <div class="popup">
       <h3 id="popupTitle"></h3>
       <p id="popupText"></p>
       <button onclick="closePopup()">Stäng</button>
@@ -460,19 +445,7 @@
   </div>
 
   <script>
-    // ======== KONFIG =========
     const API_BASE = "https://keratin-server.onrender.com";
-
-    // Samma lösenord som i login.html
-    const ADMIN_PASSWORD = "queen2025";
-
-    // =================== LOGIN-GUARD ===================
-    if (localStorage.getItem("kq_admin_authed") !== "true") {
-      // ingen giltig session -> tillbaka till login
-      window.location.href = "login.html";
-    }
-
-    // =================== DATA ===================
     let bookings = [];
 
     const tableBody = document.getElementById("bookingTable");
@@ -484,7 +457,6 @@
     const statFutureEl = document.getElementById("statFuture");
     const statPastEl = document.getElementById("statPast");
 
-    // =================== HÄMTA BOKNINGAR ===================
     async function loadBookings() {
       try {
         tableBody.innerHTML =
@@ -497,85 +469,61 @@
         updateStats();
         updateTimestamp();
       } catch (e) {
-        console.error(e);
         tableBody.innerHTML =
-          '<tr><td colspan="5" class="empty-row">Kunde inte hämta bokningar. Kontrollera servern.</td></tr>';
+          '<tr><td colspan="5" class="empty-row">Kunde inte hämta bokningar.</td></tr>';
       }
     }
 
     function updateTimestamp() {
-      const now = new Date();
-      lastUpdatedEl.textContent = now.toLocaleString("sv-SE");
+      lastUpdatedEl.textContent = new Date().toLocaleString("sv-SE");
     }
 
-    // =================== HJÄLPFUNKTIONER ===================
     function parseBookingDate(dateStr) {
-      // dateStr är "dd/mm"
-      const [dayStr, monthStr] = dateStr.split("/");
-      const day = Number(dayStr);
-      const month = Number(monthStr);
-
-      const currentYear = new Date().getFullYear();
-      return new Date(currentYear, month - 1, day);
+      const [d, m] = dateStr.split("/").map(Number);
+      return new Date(new Date().getFullYear(), m - 1, d);
     }
 
     function isFuture(dateStr) {
-      const bookingDate = parseBookingDate(dateStr);
-      const today = new Date();
-      today.setHours(0, 0, 0, 0);
-      return bookingDate > today;
+      const today = new Date(); today.setHours(0,0,0,0);
+      return parseBookingDate(dateStr) > today;
     }
 
     function isPast(dateStr) {
-      const bookingDate = parseBookingDate(dateStr);
-      const today = new Date();
-      today.setHours(0, 0, 0, 0);
-      return bookingDate < today;
+      const today = new Date(); today.setHours(0,0,0,0);
+      return parseBookingDate(dateStr) < today;
     }
 
-    // =================== STATISTIK ===================
     function updateStats() {
-      const total = bookings.length;
-      const future = bookings.filter((b) => isFuture(b.date)).length;
-      const past = bookings.filter((b) => isPast(b.date)).length;
-
-      statTotalEl.textContent = total;
-      statFutureEl.textContent = future;
-      statPastEl.textContent = past;
+      statTotalEl.textContent = bookings.length;
+      statFutureEl.textContent = bookings.filter(b => isFuture(b.date)).length;
+      statPastEl.textContent = bookings.filter(b => isPast(b.date)).length;
     }
 
-    // =================== TABELL ===================
     function renderTable() {
       const search = searchInput.value.toLowerCase();
       const filter = filterSelect.value;
 
-      let filtered = bookings.map((b, index) => ({ ...b, id: index }));
-
-      // sök
-      filtered = filtered.filter(
-        (b) =>
+      let filtered = bookings.map((b, i) => ({ ...b, id: i }))
+        .filter(b =>
           b.email.toLowerCase().includes(search) ||
-          (b.phone && b.phone.includes(search)) ||
+          (b.phone || "").includes(search) ||
           b.date.includes(search)
-      );
+        )
+        .filter(b => {
+          if (filter === "future") return isFuture(b.date);
+          if (filter === "past") return isPast(b.date);
+          return true;
+        });
 
-      // filter
-      filtered = filtered.filter((b) => {
-        if (filter === "future") return isFuture(b.date);
-        if (filter === "past") return isPast(b.date);
-        return true;
-      });
-
-      // rensa
       tableBody.innerHTML = "";
 
       if (!filtered.length) {
         tableBody.innerHTML =
-          '<tr><td colspan="5" class="empty-row">Inga bokningar hittades. Prova ändra filter eller sökord.</td></tr>';
+          '<tr><td colspan="5" class="empty-row">Inga bokningar hittades.</td></tr>';
         return;
       }
 
-      filtered.forEach((b) => {
+      filtered.forEach(b => {
         const row = document.createElement("tr");
 
         row.innerHTML = `
@@ -588,8 +536,7 @@
           </td>
         `;
 
-        // klick på rad = visa popup, men inte om man klickar på delete-knapp
-        row.addEventListener("click", (ev) => {
+        row.addEventListener("click", ev => {
           if (ev.target.matches(".btn-delete")) return;
           showPopup(b);
         });
@@ -597,24 +544,21 @@
         tableBody.appendChild(row);
       });
 
-      // koppla delete-knappar
-      document.querySelectorAll(".btn-delete").forEach((btn) => {
-        btn.addEventListener("click", async (e) => {
+      document.querySelectorAll(".btn-delete").forEach(btn => {
+        btn.addEventListener("click", async e => {
           e.stopPropagation();
-          const id = btn.getAttribute("data-id");
-          await deleteBooking(id);
+          await deleteBooking(btn.dataset.id);
         });
       });
     }
 
-    // =================== POPUP ===================
     function showPopup(b) {
       document.getElementById("popupTitle").textContent = "Bokningsdetaljer";
       document.getElementById("popupText").innerHTML = `
-        <b>Datum:</b> ${b.date}<br />
-        <b>Tid:</b> ${b.time}<br />
-        <b>Email:</b> ${b.email}<br />
-        <b>Telefon:</b> ${b.phone || "-"}<br />
+        <b>Datum:</b> ${b.date}<br>
+        <b>Tid:</b> ${b.time}<br>
+        <b>Email:</b> ${b.email}<br>
+        <b>Telefon:</b> ${b.phone || "-"}<br>
       `;
       document.getElementById("popupBg").style.display = "flex";
     }
@@ -622,29 +566,18 @@
     function closePopup() {
       document.getElementById("popupBg").style.display = "none";
     }
+    window.closePopup = closePopup;
 
-    window.closePopup = closePopup; // så att knappen i HTML hittar funktionen
-
-    // =================== TA BORT BOKNING ===================
     async function deleteBooking(id) {
       if (!confirm("Är du säker på att du vill ta bort bokningen?")) return;
-
-      try {
-        await fetch(`${API_BASE}/admin/delete/${id}`, { method: "DELETE" });
-        await loadBookings();
-      } catch (e) {
-        alert("Kunde inte ta bort bokningen. Kontrollera servern.");
-      }
+      await fetch(`${API_BASE}/admin/delete/${id}`, { method: "DELETE" });
+      loadBookings();
     }
 
-    // =================== EVENTS ===================
     searchInput.addEventListener("input", renderTable);
     filterSelect.addEventListener("change", renderTable);
-    document
-      .getElementById("refreshBtn")
-      .addEventListener("click", () => loadBookings());
+    document.getElementById("refreshBtn").addEventListener("click", loadBookings);
 
-    // =================== INIT ===================
     loadBookings();
   </script>
 </body>
