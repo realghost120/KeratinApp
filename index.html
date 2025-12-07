@@ -3,242 +3,284 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Keratin Queen Malmö</title>
+  <title>Keratin Queen – Bokning</title>
 
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
     body {
       font-family: Arial, sans-serif;
-      background: #000;          /* 🔥 Helren svart bakgrund */
+      background: linear-gradient(180deg, #0d0d0d, #1a1a1a, #0d0d0d);
       color: #fff;
-      overflow-x: hidden;
       text-align: center;
+      min-height: 100vh;
+      overflow-x: hidden;
     }
 
-    /* --- TOP BANNER --- */
+    /* JUL-BANNER */
     .xmas-banner {
-      background: #cc0000;
-      color: #fff;
+      width: 100%;
+      background: linear-gradient(90deg, #b30000, #ff1a1a);
       padding: 12px;
+      color: #fff;
       font-size: 18px;
       font-weight: bold;
-      border-bottom: 2px solid gold;
+      letter-spacing: 0.5px;
       position: sticky;
       top: 0;
-      z-index: 1000;
+      z-index: 200;
+      border-bottom: 2px solid gold;
+      text-shadow: 0 0 6px rgba(255,255,255,0.6);
     }
 
-    /* --- NAV --- */
+    /* SNÖFALL */
+    .snow {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 5;
+      background-image: url("https://i.imgur.com/5L6dG6s.png");
+      animation: snow 18s linear infinite;
+      opacity: 0.25;
+    }
+
+    @keyframes snow {
+      0% { background-position: 0 0; }
+      100% { background-position: 0 1000px; }
+    }
+
+    /* NAVBAR */
     nav {
-      background: #000;
-      padding: 15px;
+      background: rgba(0, 0, 0, 0.9);
+      padding: 15px 30px;
       display: flex;
       justify-content: center;
-      gap: 40px;
-      border-bottom: 1px solid #333;
-      position: sticky;
-      top: 50px;
-      z-index: 900;
-    }
-    nav a {
-      color: white;
-      text-decoration: none;
+      gap: 35px;
       font-size: 18px;
+      position: sticky;
+      top: 48px;
+      z-index: 100;
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    nav a {
+      color: #fff;
+      text-decoration: none;
       position: relative;
     }
+
     nav a::after {
-      content:"";
-      width: 0;
-      height: 2px;
-      background: gold;
+      content: "";
       position: absolute;
       left: 0;
       bottom: -5px;
-      transition: 0.3s;
+      width: 0;
+      height: 2px;
+      background: gold;
+      transition: width 0.3s;
     }
+
     nav a:hover::after { width: 100%; }
 
-    /* --- HERO --- */
-    #hero {
-      padding: 70px 20px;
+    /* SECTIONS */
+    .section { padding: 60px 20px; opacity: 0; transform: translateY(40px); transition: 0.9s; }
+    .section.visible { opacity: 1; transform: translateY(0); }
+
+    .section-title {
+      font-size: 36px;
+      margin-bottom: 30px;
+      text-transform: uppercase;
     }
+    .section-title span {
+      background: linear-gradient(90deg, #b30000, #ff1a1a);
+      padding: 6px 18px;
+      border-radius: 999px;
+      color: #fff;
+      border: 1px solid gold;
+    }
+
+    /* HERO */
+    #hero {
+      padding-top: 100px;
+      padding-bottom: 80px;
+    }
+
     .hero-inner {
-      max-width: 900px;
-      margin: auto;
+      max-width: 1000px;
+      margin: 0 auto;
       display: flex;
       flex-wrap: wrap;
-      justify-content: center;
       align-items: center;
+      justify-content: center;
       gap: 40px;
     }
+
     .hero-logo {
-      width: 180px;
-      height: 180px;
+      width: 190px;
+      height: 190px;
       border-radius: 50%;
-      background: #111;
-      border: 4px solid gold;
+      border: 5px solid gold;
+      background: #222;
       display: flex;
-      justify-content: center;
       align-items: center;
+      justify-content: center;
       font-size: 70px;
       box-shadow: 0 0 15px gold;
     }
-    .hero-text {
-      max-width: 450px;
-      text-align: left;
-    }
+
+    .hero-text { max-width: 520px; text-align: left; }
     .hero-text h1 {
-      color: gold;
-      font-size: 36px;
+      font-size: 38px;
       margin-bottom: 10px;
+      color: gold;
+      text-shadow: 0 0 10px rgba(255,215,0,0.7);
     }
 
     .hero-badge {
       margin-top: 10px;
+      padding: 6px 14px;
+      border-radius: 999px;
       border: 1px solid gold;
+      background: rgba(255,215,0,0.15);
       color: gold;
-      padding: 5px 15px;
-      border-radius: 20px;
-      display:inline-block;
+      display: inline-block;
     }
 
-    /* --- SECTION TITLES --- */
-    .section {
-      padding: 60px 20px;
-    }
-    .section-title {
-      font-size: 32px;
-      margin-bottom: 20px;
-      color: gold;
-    }
-
-    /* --- OFFER CARDS --- */
-    .cards {
-      max-width: 1000px;
-      margin: auto;
+    /* OFFERS */
+    #offers .cards {
+      max-width: 1100px;
+      margin: 0 auto;
       display: grid;
-      grid-template-columns: repeat(3,1fr);
+      grid-template-columns: repeat(3, 1fr);
       gap: 25px;
     }
+
     .offer-card {
-      background: #111;
-      padding: 25px;
-      border-radius: 15px;
-      border: 1px solid #333;
-      box-shadow: 0 0 20px #000;
+      background: rgba(0, 0, 0, 0.8);
+      border-radius: 18px;
+      padding: 35px 20px;
+      border: 1px solid rgba(255,255,255,0.06);
+      box-shadow: 0 18px 40px rgba(0,0,0,0.7);
     }
+
     .offer-label {
       color: gold;
       font-size: 14px;
       text-transform: uppercase;
+      margin-bottom: 10px;
     }
 
-    /* --- BOOKING BOX --- */
-    .box {
-      max-width: 500px;
-      margin: auto;
-      background: #111;
+    /* BOOKING */
+    #book .box {
+      max-width: 520px;
+      margin: 0 auto;
+      background: rgba(0, 0, 0, 0.9);
       padding: 25px;
-      border-radius: 16px;
-      border: 1px solid #333;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: 0 18px 40px rgba(0,0,0,0.8);
     }
+
     select, input {
       width: 100%;
       padding: 12px;
-      margin-top: 8px;
+      margin-bottom: 10px;
       border-radius: 10px;
-      background: #1a1a1a;
       border: none;
-      color: white;
+      background: #1f1f1f;
+      color: #fff;
       font-size: 15px;
     }
+
     button {
       width: 100%;
       padding: 15px;
-      margin-top: 12px;
-      border-radius: 50px;
-      background: gold;
-      color: #000;
-      font-size: 18px;
-      font-weight: bold;
+      border-radius: 999px;
       border: none;
-      cursor:pointer;
-      transition: 0.2s;
+      font-size: 18px;
+      background: linear-gradient(135deg, gold, #e6b800);
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.7);
     }
-    button:hover {
-      background: #ffdb4d;
-    }
+
+    button:hover { background: linear-gradient(135deg, #ffe066, #ffcc00); }
 
     footer {
       margin-top: 40px;
-      padding: 20px;
-      background: #000;
-      border-top: 1px solid #333;
-      color: #777;
+      padding: 18px;
+      background: rgba(0,0,0,0.8);
+      border-top: 1px solid gold;
+      color: #ddd;
     }
-
-    @media(max-width:900px){ .cards{grid-template-columns:1fr;} .hero-text{text-align:center;} }
   </style>
 </head>
-
 <body>
 
-<div class="xmas-banner">🎄 20% Julrabatt – Gäller t.o.m 24 december! 🎁</div>
+<div class="xmas-banner">🎄 20% Julrabatt på alla behandlingar – Gäller t.o.m 24 december! 🎁</div>
+<div class="snow"></div>
 
 <nav>
   <a href="#hero">Hem</a>
   <a href="#offers">Tjänster</a>
   <a href="#book">Boka</a>
+  <a href="#social">Social Media</a>
   <a href="#contact">Kontakt</a>
 </nav>
 
 <!-- HERO -->
-<section id="hero">
+<section class="section" id="hero">
   <div class="hero-inner">
     <div class="hero-logo">💇‍♀️</div>
+
     <div class="hero-text">
       <h1>Keratin Queen Malmö</h1>
-      <p>Permanent keratin & proteinbehandling för rakt, glansigt och friskt hår.</p>
+      <p>
+        Permanent keratin- & proteinbehandling för rakt, glansigt och friskt hår.
+        Boka din tid och låt oss ta hand om ditt hår som en drottning.
+      </p>
       <div class="hero-badge">✨ Julkampanj – 20% Rabatt</div>
     </div>
   </div>
 </section>
 
 <!-- OFFERS -->
-<section id="offers" class="section">
-  <h2 class="section-title">Erbjudanden</h2>
+<section class="section" id="offers">
+  <h2 class="section-title"><span>Erbjudanden</span></h2>
 
   <div class="cards">
     <div class="offer-card">
       <div class="offer-label">Julrabatt 20%</div>
-      <h3>Keratinbehandling</h3>
-      <p>Ger starkt, mjukt & glansigt hår.</p>
+      <div class="offer-title">Keratin protein behandling</div>
+      <p>Permanenta utjämnande behandlingar med keratin & protein.</p>
     </div>
 
     <div class="offer-card">
       <div class="offer-label">Julrabatt 20%</div>
-      <h3>Klippning</h3>
-      <p>Professionell klippning efter stil.</p>
+      <div class="offer-title">Klippning</div>
+      <p>Fräsch klippning som passar din stil.</p>
     </div>
 
     <div class="offer-card">
       <div class="offer-label">Julrabatt 20%</div>
-      <h3>Färgning</h3>
-      <p>Skonsam färg, toning & slingor.</p>
+      <div class="offer-title">Färgning</div>
+      <p>Färg, toning och slingor med skonsamma produkter.</p>
     </div>
   </div>
 </section>
 
 <!-- BOOKING -->
-<section id="book" class="section">
-  <h2 class="section-title">Boka tid</h2>
+<section class="section" id="book">
+  <h2 class="section-title"><span>Boka tid</span></h2>
 
   <div class="box">
     <h2>Boka din behandling</h2>
 
-    <label>Månad</label>
+    <label>Välj månad</label>
     <select id="month">
-      <option value="">Välj månad</option>
+      <option value="">--Välj--</option>
       <option value="01">Januari</option>
       <option value="02">Februari</option>
       <option value="03">Mars</option>
@@ -253,99 +295,133 @@
       <option value="12">December</option>
     </select>
 
-    <label>Dag</label>
-    <select id="day"><option value="">Välj dag</option></select>
+    <label>Välj dag</label>
+    <select id="day"><option value="">--Välj--</option></select>
 
-    <label>Tid</label>
-    <select id="start"><option value="">Välj tid</option></select>
+    <label>Välj tid</label>
+    <select id="start"><option value="">--Välj--</option></select>
 
     <label>E-mail</label>
-    <input id="customerEmail" type="email" placeholder="Din e-mail">
+    <input type="email" id="customerEmail" placeholder="Skriv din e-mail">
 
     <label>Telefonnummer</label>
-    <input id="customerPhone" type="tel" placeholder="Ditt nummer">
+    <input type="tel" id="customerPhone" placeholder="Skriv ditt telefonnummer">
 
     <button id="finishBtn">Boka klart</button>
-    <p id="doneMessage" style="margin-top:10px;"></p>
+    <p id="doneMessage"></p>
+  </div>
+</section>
+
+<!-- SOCIAL -->
+<section class="section" id="social">
+  <h2 class="section-title"><span>Social media</span></h2>
+
+  <div class="social-grid">
+    <div class="social-card">
+      <div class="social-icon">📷</div>
+      <div class="social-title">Instagram</div>
+      <div class="social-handle">@Keratin_protein_malmo</div>
+    </div>
+
+    <div class="social-card">
+      <div class="social-icon">🎵</div>
+      <div class="social-title">TikTok</div>
+      <div class="social-handle">@Keratin-protein-malmo</div>
+    </div>
   </div>
 </section>
 
 <!-- CONTACT -->
-<section id="contact" class="section">
-  <h2 class="section-title">Kontakt</h2>
-  <p>Malmö — adress ges vid bokning.</p>
+<section class="section" id="contact">
+  <h2 class="section-title"><span>Kontakt</span></h2>
+  <p><strong>Keratin Queen Malmö</strong></p>
+  <p>Malmö – adress ges vid bokning.</p>
 </section>
 
-<footer>© <span id="year"></span> Keratin Queen Malmö</footer>
+<footer>
+  © <span id="year"></span> Keratin Queen – Alla rättigheter förbehållna.
+</footer>
 
 <script>
-document.getElementById("year").textContent = new Date().getFullYear();
+  document.getElementById("year").textContent = new Date().getFullYear();
 
-/* --- Fill days --- */
-const daySelect = document.getElementById("day");
-for(let i=1;i<=31;i++){
-  let d=i<10? "0"+i : i;
-  daySelect.innerHTML += `<option value="${d}">${d}</option>`;
-}
+  const sections = document.querySelectorAll('.section');
+  const reveal = () => {
+    sections.forEach(s => {
+      if (s.getBoundingClientRect().top < window.innerHeight - 60) {
+        s.classList.add('visible');
+      }
+    });
+  };
+  window.addEventListener('scroll', reveal);
+  window.addEventListener('load', reveal);
 
-/* --- Load times --- */
-function loadTimes(){
-  const month=document.getElementById("month").value;
-  const day=document.getElementById("day").value;
-  const timeSel=document.getElementById("start");
-  timeSel.innerHTML = `<option value="">Välj tid</option>`;
-  if(!month || !day) return;
-
-  ["10:00","14:00","17:00"].forEach(t=>{
-    timeSel.innerHTML += `<option value="${t}">${t}</option>`;
-  });
-}
-
-document.getElementById("month").addEventListener("change", loadTimes);
-document.getElementById("day").addEventListener("change", loadTimes);
-
-/* --- Booking send --- */
-document.getElementById("finishBtn").addEventListener("click", ()=>{
-
-  const month=document.getElementById("month").value;
-  const day=document.getElementById("day").value;
-  const time=document.getElementById("start").value;
-  const email=document.getElementById("customerEmail").value;
-  const phone=document.getElementById("customerPhone").value;
-  const msg=document.getElementById("doneMessage");
-
-  if(!month || !day || !time || !email || !phone){
-    msg.textContent="❌ Fyll i alla fält!";
-    msg.style.color="red";
-    return;
+  // Fyll dagar
+  const daySelect = document.getElementById("day");
+  for (let i = 1; i <= 31; i++) {
+    let d = i < 10 ? "0" + i : i;
+    daySelect.innerHTML += `<option value="${d}">${d}</option>`;
   }
 
-  fetch("https://keratin-server.onrender.com/book",{
-    method:"POST",
-    headers:{"Content-Type":"application/json"},
-    body:JSON.stringify({
-      date:`${day}/${month}`,
-      time, email, phone
-    })
-  })
-  .then(r=>r.json())
-  .then(data=>{
-    if(data.success){
-      msg.textContent="✔ Bokning skickad!";
-      msg.style.color="lightgreen";
-    } else if(data.error==="Tid upptagen"){
-      msg.textContent="❌ Tiden är redan bokad!";
-      msg.style.color="red";
-    } else {
-      msg.textContent="❌ Fel på servern.";
-      msg.style.color="red";
+  function loadTimes() {
+    let month = document.getElementById("month").value;
+    let day = document.getElementById("day").value;
+    let select = document.getElementById("start");
+
+    select.innerHTML = '<option value="">--Välj--</option>';
+    if (!month || !day) return;
+
+    ["10:00", "14:00", "17:00"].forEach(t => {
+      select.innerHTML += `<option value="${t}">${t}</option>`;
+    });
+  }
+
+  document.getElementById("month").addEventListener("change", loadTimes);
+  document.getElementById("day").addEventListener("change", loadTimes);
+
+  // SKICKA BOKNING
+  document.getElementById("finishBtn").addEventListener("click", () => {
+    const month = document.getElementById("month").value;
+    const day = document.getElementById("day").value;
+    const time = document.getElementById("start").value;
+    const email = document.getElementById("customerEmail").value;
+    const phone = document.getElementById("customerPhone").value;
+    const msg = document.getElementById("doneMessage");
+
+    if (!month || !day || !time || !email || !phone) {
+      msg.textContent = "Vänligen fyll i alla fält!";
+      msg.style.color = "red";
+      return;
     }
-  })
-  .catch(()=>{
-    msg.textContent="❌ Kunde inte kontakta servern.";
-    msg.style.color="red";
+
+    fetch("https://keratin-server.onrender.com/book", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        date: `${day}/${month}`,
+        time,
+        email,
+        phone
+      })
+    })
+    .then(res => res.json())
+    .then(data => {
+      if (data.success) {
+        msg.textContent = "✔ Bokning skickad!";
+        msg.style.color = "#00e676";
+      } else if (data.error === "Tid upptagen") {
+        msg.textContent = "❌ Denna tid är redan bokad!";
+        msg.style.color = "red";
+      } else {
+        msg.textContent = "❌ Ett fel uppstod.";
+        msg.style.color = "red";
+      }
+    })
+    .catch(() => {
+      msg.textContent = "❌ Kunde inte kontakta servern.";
+      msg.style.color = "red";
+    });
   });
-});
 </script>
 
 </body>
