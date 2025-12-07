@@ -18,63 +18,31 @@
       color: #fff;
       text-align: center;
       min-height: 100vh;
-      overflow-x: hidden;
     }
 
-    /* 🎄 JULBANNER */
-    .xmas-banner {
-      width: 100%;
-      background: linear-gradient(90deg, #b30000, #ff1a1a);
-      padding: 12px;
-      color: #fff;
-      font-size: 18px;
-      font-weight: bold;
-      letter-spacing: 0.5px;
-      position: sticky;
-      top: 0;
-      z-index: 200;
-      border-bottom: 2px solid gold;
-      text-shadow: 0 0 6px rgba(255,255,255,0.6);
-    }
-
-    /* ❄ SNÖFALL */
-    .snow {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: 5;
-      background-image: url("https://i.imgur.com/5L6dG6s.png");
-      animation: snow 18s linear infinite;
-      opacity: 0.25;
-    }
-
-    @keyframes snow {
-      0% { background-position: 0 0; }
-      100% { background-position: 0 1000px; }
-    }
-
-    /* Bakgrund */
+    /* Snygg julbakgrund – fungerar alltid */
     .bg-pattern {
       position: fixed;
       inset: 0;
-      background: radial-gradient(circle at top, #444 0, #111 45%, #000 100%);
+      background-image: url("https://images.unsplash.com/photo-1512909006721-3d6018887383?auto=format&fit=crop&w=1920&q=60");
+      background-size: cover;
+      background-position: center;
+      opacity: 0.18;
       z-index: -2;
     }
 
-    .bg-overlay {
-      position: fixed;
-      inset: 0;
-      background-image: url("header.jpg");
-      background-size: cover;
-      background-position: center;
-      opacity: 0.15;
-      z-index: -1;
+    /* Röd julbanner */
+    .xmas-banner {
+      background: #d70000;
+      color: #fff;
+      padding: 12px;
+      font-size: 18px;
+      font-weight: bold;
+      text-align: center;
+      border-bottom: 2px solid gold;
+      text-shadow: 0 0 10px rgba(255,255,255,0.8);
     }
 
-    /* NAVBAR */
     nav {
       background: rgba(0, 0, 0, 0.9);
       padding: 15px 30px;
@@ -83,7 +51,7 @@
       gap: 35px;
       font-size: 18px;
       position: sticky;
-      top: 48px;
+      top: 0;
       z-index: 100;
       backdrop-filter: blur(10px);
       border-bottom: 1px solid rgba(255,255,255,0.08);
@@ -103,7 +71,7 @@
       bottom: -5px;
       width: 0;
       height: 2px;
-      background: gold;
+      background: #ffcc33;
       transition: width 0.3s;
     }
 
@@ -111,7 +79,6 @@
       width: 100%;
     }
 
-    /* SECTIONS */
     .section {
       padding: 60px 20px;
       opacity: 0;
@@ -132,16 +99,14 @@
     }
 
     .section-title span {
-      background: linear-gradient(90deg, #b30000, #ff1a1a);
+      background: #8b0000;
       padding: 6px 18px;
       border-radius: 999px;
-      color: #fff;
       border: 1px solid gold;
     }
 
-    /* HERO */
     #hero {
-      padding-top: 100px;
+      padding-top: 80px;
       padding-bottom: 80px;
     }
 
@@ -159,13 +124,12 @@
       width: 190px;
       height: 190px;
       border-radius: 50%;
-      border: 5px solid gold;
+      border: 4px solid #ffcc33;
       background: #222;
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 70px;
-      box-shadow: 0 0 15px gold;
     }
 
     .hero-text {
@@ -176,21 +140,25 @@
     .hero-text h1 {
       font-size: 38px;
       margin-bottom: 10px;
-      color: gold;
-      text-shadow: 0 0 10px rgba(255,215,0,0.7);
+    }
+
+    .hero-text p {
+      font-size: 18px;
+      line-height: 1.6;
+      color: #ddd;
+      margin-bottom: 15px;
     }
 
     .hero-badge {
+      display: inline-block;
       margin-top: 10px;
       padding: 6px 14px;
       border-radius: 999px;
-      border: 1px solid gold;
+      border: 1px solid #ffcc33;
       font-size: 14px;
-      background: rgba(255,215,0,0.15);
-      color: gold;
+      letter-spacing: 0.5px;
     }
 
-    /* OFFER CARDS */
     #offers .cards {
       max-width: 1100px;
       margin: 0 auto;
@@ -208,45 +176,81 @@
     }
 
     .offer-label {
-      color: gold;
-      font-size: 14px;
       text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #ffcc33;
+      font-size: 14px;
       margin-bottom: 10px;
-      letter-spacing: 1.5px;
     }
 
-    /* BOOKING */
+    .offer-title {
+      font-size: 26px;
+      font-weight: bold;
+      margin-bottom: 10px;
+      color: #ffd700;
+    }
+
     #book .box {
       max-width: 520px;
       margin: 0 auto;
-      background: rgba(0, 0, 0, 0.9);
-      padding: 25px;
+      background: rgba(0, 0, 0, 0.88);
+      padding: 25px 24px 30px;
       border-radius: 18px;
       border: 1px solid rgba(255,255,255,0.08);
       box-shadow: 0 18px 40px rgba(0,0,0,0.8);
+      text-align: left;
     }
 
-    button {
-      background: linear-gradient(135deg, gold, #e6b800);
-      color: #000;
-      font-weight: bold;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.7);
-    }
-
-    button:hover {
-      background: linear-gradient(135deg, #ffe066, #ffcc00);
-    }
-
-    /* FOOTER */
-    footer {
-      margin-top: 40px;
-      padding: 18px 10px;
-      background: rgba(0,0,0,0.8);
-      border-top: 1px solid gold;
+    label {
+      display: block;
+      font-size: 14px;
+      margin-top: 8px;
+      margin-bottom: 4px;
       color: #ddd;
     }
 
-    /* MOBILE */
+    input, select {
+      width: 100%;
+      padding: 11px;
+      margin-bottom: 6px;
+      border: none;
+      border-radius: 10px;
+      font-size: 15px;
+      background: #1f1f1f;
+      color: #fff;
+      outline: none;
+    }
+
+    button {
+      width: 100%;
+      padding: 13px;
+      margin-top: 10px;
+      border: none;
+      border-radius: 999px;
+      font-size: 16px;
+      font-weight: bold;
+      background: linear-gradient(135deg,#ffcc33,#ffb300);
+      color: #000;
+      cursor: pointer;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.7);
+    }
+
+    #doneMessage {
+      font-size: 16px;
+      margin-top: 12px;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    footer {
+      margin-top: 40px;
+      padding: 18px 10px;
+      font-size: 13px;
+      color: #aaa;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      background: rgba(0,0,0,0.8);
+    }
+
     @media (max-width: 900px) {
       #offers .cards {
         grid-template-columns: 1fr;
@@ -263,13 +267,15 @@
     }
   </style>
 </head>
+
 <body>
 
-<div class="xmas-banner">🎄 20% Julrabatt på alla behandlingar – Gäller t.o.m 24 december! 🎁</div>
-<div class="snow"></div>
+<!-- 🎄 JULRABATT BANNER -->
+<div class="xmas-banner">
+  🎁 20% Julrabatt på alla behandlingar – Gäller t.o.m 24 december! 🎁
+</div>
 
 <div class="bg-pattern"></div>
-<div class="bg-overlay"></div>
 
 <nav>
   <a href="#hero">Hem</a>
@@ -283,46 +289,43 @@
 <section class="section" id="hero">
   <div class="hero-inner">
     <div class="hero-logo">💇‍♀️</div>
-
     <div class="hero-text">
       <h1>Keratin Queen Malmö</h1>
       <p>
-        Permanent keratin- & proteinbehandling för rakt, glansigt och friskt hår.  
-        Boka din tid och låt oss ta hand om ditt hår som en drottning.
+        Permanent keratin- & proteinbehandling för dig som vill ha
+        rakt, glansigt och friskt hår – utan friss.
       </p>
-      <div class="hero-badge">✨ Julkampanj – 20% Rabatt</div>
+      <div class="hero-badge">✨ 20% Julrabatt just nu!</div>
     </div>
   </div>
 </section>
 
-<!-- OFFERS -->
+<!-- ERBJUDANDEN -->
 <section class="section" id="offers">
   <h2 class="section-title"><span>Erbjudanden</span></h2>
 
   <div class="cards">
     <div class="offer-card">
-      <div class="offer-label">Julrabatt 20%</div>
+      <div class="offer-label">JULRABATT 20%</div>
       <div class="offer-title">Keratin protein behandling</div>
-      <p class="offer-text">
-        Permanent utjämnande behandling med keratin, protein och vitaminer.
-      </p>
+      <p>Extra glans, styrka och följsamt hår.</p>
     </div>
 
     <div class="offer-card">
-      <div class="offer-label">Julrabatt 20%</div>
+      <div class="offer-label">JULRABATT 20%</div>
       <div class="offer-title">Klippning</div>
-      <p class="offer-text">Fräsch klippning som passar din stil.</p>
+      <p>Fräsch klippning som passar din stil.</p>
     </div>
 
     <div class="offer-card">
-      <div class="offer-label">Julrabatt 20%</div>
+      <div class="offer-label">JULRABATT 20%</div>
       <div class="offer-title">Färgning</div>
-      <p class="offer-text">Färg, toning och slingor med skonsamma produkter.</p>
+      <p>Slingor, färg eller toning med skonsamma produkter.</p>
     </div>
   </div>
 </section>
 
-<!-- BOOKING -->
+<!-- BOKNING -->
 <section class="section" id="book">
   <h2 class="section-title"><span>Boka tid</span></h2>
 
@@ -332,18 +335,9 @@
     <label>Välj månad</label>
     <select id="month">
       <option value="">--Välj--</option>
+      <option value="12">December</option>
       <option value="01">Januari</option>
       <option value="02">Februari</option>
-      <option value="03">Mars</option>
-      <option value="04">April</option>
-      <option value="05">Maj</option>
-      <option value="06">Juni</option>
-      <option value="07">Juli</option>
-      <option value="08">Augusti</option>
-      <option value="09">September</option>
-      <option value="10">Oktober</option>
-      <option value="11">November</option>
-      <option value="12">December</option>
     </select>
 
     <label>Välj dag</label>
@@ -359,37 +353,24 @@
     <input type="tel" id="customerPhone" placeholder="Skriv ditt telefonnummer">
 
     <button id="finishBtn">Boka klart</button>
+
     <p id="doneMessage"></p>
   </div>
 </section>
 
-<!-- SOCIAL -->
+<!-- SOCIAL MEDIA -->
 <section class="section" id="social">
-  <h2 class="section-title"><span>Social media</span></h2>
+  <h2 class="section-title"><span>Social Media</span></h2>
 
   <div class="social-grid">
-    <div class="social-card">
-      <div class="social-icon">📷</div>
-      <div class="social-title">Instagram</div>
-      <div class="social-handle">@Keratin_protein_malmo</div>
-    </div>
-
-    <div class="social-card">
-      <div class="social-icon">🎵</div>
-      <div class="social-title">TikTok</div>
-      <div class="social-handle">@Keratin-protein-malmo</div>
-    </div>
+    <p>Instagram: @Keratin_protein_malmo<br>TikTok: @Keratin-protein-malmo</p>
   </div>
 </section>
 
-<!-- CONTACT -->
+<!-- KONTAKT -->
 <section class="section" id="contact">
   <h2 class="section-title"><span>Kontakt</span></h2>
-
-  <div class="contact-inner">
-    <p><strong>Keratin Queen Malmö</strong></p>
-    <p>Malmö – adress ges vid bokning.</p>
-  </div>
+  <p>Malmö – exakt adress meddelas vid bokning.</p>
 </section>
 
 <footer>
@@ -410,20 +391,18 @@
   window.addEventListener('scroll', reveal);
   window.addEventListener('load', reveal);
 
-  // Fyll dagar
   const daySelect = document.getElementById("day");
   for (let i = 1; i <= 31; i++) {
-    const d = i < 10 ? "0" + i : i;
+    const d = i < 10 ? "0" + i : "" + i;
     daySelect.innerHTML += `<option value="${d}">${d}</option>`;
   }
 
   function loadTimes() {
-    const month = document.getElementById("month").value;
-    const day = document.getElementById("day").value;
-    const select = document.getElementById("start");
+    let month = document.getElementById("month").value;
+    let day = document.getElementById("day").value;
+    let select = document.getElementById("start");
 
     select.innerHTML = '<option value="">--Välj--</option>';
-
     if (!month || !day) return;
 
     ["10:00", "14:00", "17:00"].forEach(t => {
@@ -434,7 +413,6 @@
   document.getElementById("month").addEventListener("change", loadTimes);
   document.getElementById("day").addEventListener("change", loadTimes);
 
-  // Skicka bokning
   document.getElementById("finishBtn").addEventListener("click", () => {
     const month = document.getElementById("month").value;
     const day = document.getElementById("day").value;
@@ -443,28 +421,41 @@
     const phone = document.getElementById("customerPhone").value;
     const msg = document.getElementById("doneMessage");
 
+    msg.textContent = "";
+    msg.style.color = "#00e676";
+
     if (!month || !day || !time || !email || !phone) {
       msg.textContent = "Vänligen fyll i alla fält!";
-      msg.className = "error";
+      msg.style.color = "#ff5252";
       return;
     }
 
     fetch("https://keratin-server.onrender.com/book", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ date: `${day}/${month}`, time, email, phone })
+      body: JSON.stringify({
+        date: `${day}/${month}`,
+        time,
+        email,
+        phone
+      })
     })
     .then(res => res.json())
     .then(data => {
-      if (data.success) msg.textContent = "✔ Bokning skickad!";
-      else if (data.error === "Tid upptagen") msg.textContent = "❌ Tiden är redan bokad!";
-      else msg.textContent = "❌ Ett fel uppstod.";
+      if (data.success) {
+        msg.textContent = "✔ Bokning skickad!";
+      } else {
+        msg.textContent = "❌ Denna tid är redan bokad!";
+        msg.style.color = "#ff5252";
+      }
     })
     .catch(() => {
-      msg.textContent = "❌ Kunde inte kontakta servern.";
+      msg.textContent = "❌ Serverfel.";
+      msg.style.color = "#ff5252";
     });
   });
 </script>
 
 </body>
 </html>
+
