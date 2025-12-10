@@ -1,584 +1,122 @@
 <!DOCTYPE html>
 <html lang="sv">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Admin – Bokningar</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel – Keratin Bokningar</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial,
-        sans-serif;
-    }
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-    body {
-      min-height: 100vh;
-      background: radial-gradient(circle at top, #25213a 0, #050509 55%, #000 100%);
-      color: #f5f5ff;
-    }
+    <style>
+        body {
+            margin: 0;
+            background: #111;
+            color: white;
+            font-family: "Poppins", sans-serif;
+        }
 
-    .page {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 14px 16px 32px;
-    }
+        .container {
+            width: 600px;
+            margin: 60px auto;
+            background: #1a1a1a;
+            padding: 30px;
+            border-radius: 12px;
+        }
 
-    .top-bar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      margin-bottom: 16px;
-    }
+        h2 {
+            font-size: 28px;
+            border-left: 4px solid white;
+            padding-left: 12px;
+            text-transform: uppercase;
+            margin-bottom: 25px;
+        }
 
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
 
-    .brand-logo {
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      background: #ffcc33;
-      color: #000;
-      font-weight: 700;
-      font-size: 14px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
+        table th, table td {
+            padding: 12px;
+            border-bottom: 1px solid #333;
+            text-align: left;
+        }
 
-    .brand-text-title {
-      font-size: 15px;
-      font-weight: 600;
-    }
+        table th {
+            background: #222;
+        }
 
-    .brand-text-sub {
-      font-size: 11px;
-      color: #ffa726;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-    }
+        button {
+            padding: 6px 14px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            background: #e74c3c;
+            color: white;
+        }
 
-    .top-right {
-      text-align: right;
-    }
+        .no-bookings {
+            margin-top: 20px;
+            opacity: 0.7;
+        }
+    </style>
 
-    .top-right-small {
-      font-size: 11px;
-      color: #c2c2d5;
-    }
-
-    .top-right-badge {
-      font-size: 11px;
-      color: #ffb300;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-    }
-
-    .stats-row {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 14px;
-      margin-bottom: 14px;
-    }
-
-    .card-stat {
-      background: linear-gradient(145deg, #141422, #090913);
-      border-radius: 16px;
-      padding: 12px 14px;
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8);
-    }
-
-    .stat-label {
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: #9c9cc2;
-      margin-bottom: 6px;
-    }
-
-    .stat-value {
-      font-size: 20px;
-      font-weight: 600;
-    }
-
-    .stat-tag {
-      font-size: 11px;
-      margin-top: 6px;
-      padding: 3px 8px;
-      border-radius: 999px;
-      display: inline-block;
-    }
-
-    .stat-tag-all {
-      background: rgba(255, 255, 255, 0.06);
-      color: #e0e0ff;
-    }
-
-    .stat-tag-future {
-      background: rgba(76, 175, 80, 0.18);
-      color: #81c784;
-    }
-
-    .stat-tag-past {
-      background: rgba(244, 67, 54, 0.18);
-      color: #ef9a9a;
-    }
-
-    .filter-bar {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      align-items: center;
-      margin-bottom: 10px;
-    }
-
-    .filter-bar-left {
-      flex: 1 1 220px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(5, 5, 12, 0.9);
-      border-radius: 999px;
-      padding: 7px 11px;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-    }
-
-    .filter-bar-left input {
-      flex: 1;
-      border: none;
-      background: transparent;
-      color: #fff;
-      font-size: 13px;
-      outline: none;
-    }
-
-    .filter-bar-left span {
-      font-size: 13px;
-      color: #8b8ba4;
-    }
-
-    .filter-select {
-      min-width: 150px;
-      padding: 7px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      background: rgba(3, 3, 12, 0.96);
-      color: #f5f5ff;
-      font-size: 13px;
-      outline: none;
-    }
-
-    .btn-refresh {
-      padding: 7px 14px;
-      border-radius: 999px;
-      border: none;
-      font-size: 13px;
-      font-weight: 600;
-      background: linear-gradient(135deg, #ffcc33, #ffb300);
-      color: #000;
-      cursor: pointer;
-      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.9);
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .btn-refresh span {
-      font-size: 14px;
-    }
-
-    .table-wrapper {
-      margin-top: 8px;
-      background: rgba(6, 6, 15, 0.96);
-      border-radius: 16px;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      overflow: hidden;
-      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.95);
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 13px;
-    }
-
-    thead {
-      background: rgba(14, 14, 26, 0.98);
-    }
-
-    th,
-    td {
-      padding: 10px 12px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-      text-align: left;
-      white-space: nowrap;
-    }
-
-    th {
-      font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: #a5a5c5;
-    }
-
-    tbody tr {
-      cursor: pointer;
-    }
-
-    tbody tr:nth-child(2n) {
-      background: rgba(20, 20, 32, 0.9);
-    }
-
-    tbody tr:hover {
-      background: rgba(47, 47, 79, 0.9);
-    }
-
-    .col-remove {
-      text-align: center;
-      width: 64px;
-    }
-
-    .btn-delete {
-      border: none;
-      border-radius: 999px;
-      padding: 5px 10px;
-      background: rgba(244, 67, 54, 0.9);
-      color: #fff;
-      font-size: 12px;
-      font-weight: 600;
-      cursor: pointer;
-    }
-
-    .empty-row {
-      text-align: center;
-      padding: 16px 10px;
-      font-size: 13px;
-      color: #9f9fc0;
-    }
-
-    .table-scroll {
-      width: 100%;
-      overflow-x: auto;
-    }
-
-    .popup-bg {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.7);
-      justify-content: center;
-      align-items: center;
-      z-index: 40;
-    }
-
-    .popup {
-      width: 92%;
-      max-width: 420px;
-      background: #10101c;
-      border-radius: 18px;
-      padding: 20px 18px 18px;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      box-shadow: 0 18px 50px rgba(0, 0, 0, 0.98);
-    }
-
-    .popup h3 {
-      font-size: 18px;
-      margin-bottom: 10px;
-    }
-
-    .popup p {
-      font-size: 14px;
-      line-height: 1.6;
-      color: #d2d2f0;
-    }
-
-    .popup button {
-      margin-top: 14px;
-      padding: 9px 18px;
-      border-radius: 999px;
-      border: none;
-      background: #ffcc33;
-      font-weight: 600;
-      cursor: pointer;
-      font-size: 14px;
-      color: #000;
-    }
-
-    .footnote {
-      margin-top: 10px;
-      font-size: 11px;
-      color: #8888a8;
-      text-align: right;
-    }
-
-    @media (max-width: 780px) {
-      .page {
-        padding-inline: 10px;
-      }
-
-      .top-bar {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 6px;
-      }
-
-      .stats-row {
-        grid-template-columns: minmax(0, 1fr);
-      }
-
-      th,
-      td {
-        padding: 9px 10px;
-      }
-
-      .filter-bar {
-        flex-direction: column;
-        align-items: stretch;
-      }
-
-      .filter-bar-left {
-        border-radius: 12px;
-      }
-
-      .filter-select,
-      .btn-refresh {
-        width: 100%;
-        justify-content: center;
-      }
-    }
-  </style>
 </head>
 <body>
-  <div class="page">
-    <div class="top-bar">
-      <div class="brand">
-        <div class="brand-logo">KQ</div>
-        <div>
-          <div class="brand-text-title">Admin – Bokningar</div>
-          <div class="brand-text-sub">Keratin Queen Malmö</div>
-        </div>
-      </div>
 
-      <div class="top-right">
-        <div class="top-right-small">Adminpanel</div>
-        <div class="top-right-badge">Öppen åtkomst (ingen inloggning)</div>
-      </div>
-    </div>
+<div class="container">
+    <h2>Admin Panel – Bokningar</h2>
 
-    <div class="stats-row">
-      <div class="card-stat">
-        <div class="stat-label">Totalt</div>
-        <div class="stat-value" id="statTotal">0</div>
-        <div class="stat-tag stat-tag-all">Alla bokningar</div>
-      </div>
+    <table id="bookingTable">
+        <tr>
+            <th>Månad</th>
+            <th>Dag</th>
+            <th>Tid</th>
+            <th>Telefon</th>
+            <th>Email</th>
+            <th>Ta bort</th>
+        </tr>
+    </table>
 
-      <div class="card-stat">
-        <div class="stat-label">Kommande</div>
-        <div class="stat-value" id="statFuture">0</div>
-        <div class="stat-tag stat-tag-future">Framtida tider</div>
-      </div>
+    <p id="emptyMessage" class="no-bookings">Inga bokningar ännu...</p>
+</div>
 
-      <div class="card-stat">
-        <div class="stat-label">Förflutna</div>
-        <div class="stat-value" id="statPast">0</div>
-        <div class="stat-tag stat-tag-past">Redan passerade</div>
-      </div>
-    </div>
+<script>
+    function loadBookings() {
+        let bookings = JSON.parse(localStorage.getItem("bookings")) || [];
 
-    <div class="filter-bar">
-      <div class="filter-bar-left">
-        <span>🔍</span>
-        <input id="search" type="text" placeholder="Sök (datum, email, telefon)" />
-      </div>
+        let table = document.getElementById("bookingTable");
+        let emptyMessage = document.getElementById("emptyMessage");
 
-      <select id="filter" class="filter-select">
-        <option value="all">Alla bokningar</option>
-        <option value="future">Endast framtida</option>
-        <option value="past">Endast passerade</option>
-      </select>
+        // Visa eller göm "inga bokningar"
+        emptyMessage.style.display = bookings.length === 0 ? "block" : "none";
 
-      <button class="btn-refresh" id="refreshBtn">
-        <span>⟳</span> Uppdatera
-      </button>
-    </div>
+        bookings.forEach((b, index) => {
+            let row = document.createElement("tr");
 
-    <div class="table-wrapper">
-      <div class="table-scroll">
-        <table>
-          <thead>
-            <tr>
-              <th>Datum</th>
-              <th>Tid</th>
-              <th>Email</th>
-              <th>Telefon</th>
-              <th class="col-remove">Ta bort</th>
-            </tr>
-          </thead>
-          <tbody id="bookingTable">
-            <tr>
-              <td colspan="5" class="empty-row">Hämtar bokningar...</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
+            row.innerHTML = `
+                <td>${b.month}</td>
+                <td>${b.day}</td>
+                <td>${b.time}</td>
+                <td>${b.phone}</td>
+                <td>${b.email}</td>
+                <td><button onclick="deleteBooking(${index})">X</button></td>
+            `;
 
-    <div class="footnote">
-      Senast uppdaterad: <span id="lastUpdated">–</span>
-    </div>
-  </div>
-
-  <div class="popup-bg" id="popupBg">
-    <div class="popup">
-      <h3 id="popupTitle"></h3>
-      <p id="popupText"></p>
-      <button onclick="closePopup()">Stäng</button>
-    </div>
-  </div>
-
-  <script>
-    const API_BASE = "https://keratin-server.onrender.com";
-    let bookings = [];
-
-    const tableBody = document.getElementById("bookingTable");
-    const searchInput = document.getElementById("search");
-    const filterSelect = document.getElementById("filter");
-    const lastUpdatedEl = document.getElementById("lastUpdated");
-
-    const statTotalEl = document.getElementById("statTotal");
-    const statFutureEl = document.getElementById("statFuture");
-    const statPastEl = document.getElementById("statPast");
-
-    async function loadBookings() {
-      try {
-        tableBody.innerHTML =
-          '<tr><td colspan="5" class="empty-row">Hämtar bokningar...</td></tr>';
-
-        const res = await fetch(`${API_BASE}/admin/bookings`);
-        bookings = await res.json();
-
-        renderTable();
-        updateStats();
-        updateTimestamp();
-      } catch (e) {
-        tableBody.innerHTML =
-          '<tr><td colspan="5" class="empty-row">Kunde inte hämta bokningar.</td></tr>';
-      }
-    }
-
-    function updateTimestamp() {
-      lastUpdatedEl.textContent = new Date().toLocaleString("sv-SE");
-    }
-
-    function parseBookingDate(dateStr) {
-      const [d, m] = dateStr.split("/").map(Number);
-      return new Date(new Date().getFullYear(), m - 1, d);
-    }
-
-    function isFuture(dateStr) {
-      const today = new Date(); today.setHours(0,0,0,0);
-      return parseBookingDate(dateStr) > today;
-    }
-
-    function isPast(dateStr) {
-      const today = new Date(); today.setHours(0,0,0,0);
-      return parseBookingDate(dateStr) < today;
-    }
-
-    function updateStats() {
-      statTotalEl.textContent = bookings.length;
-      statFutureEl.textContent = bookings.filter(b => isFuture(b.date)).length;
-      statPastEl.textContent = bookings.filter(b => isPast(b.date)).length;
-    }
-
-    function renderTable() {
-      const search = searchInput.value.toLowerCase();
-      const filter = filterSelect.value;
-
-      let filtered = bookings.map((b, i) => ({ ...b, id: i }))
-        .filter(b =>
-          b.email.toLowerCase().includes(search) ||
-          (b.phone || "").includes(search) ||
-          b.date.includes(search)
-        )
-        .filter(b => {
-          if (filter === "future") return isFuture(b.date);
-          if (filter === "past") return isPast(b.date);
-          return true;
+            table.appendChild(row);
         });
-
-      tableBody.innerHTML = "";
-
-      if (!filtered.length) {
-        tableBody.innerHTML =
-          '<tr><td colspan="5" class="empty-row">Inga bokningar hittades.</td></tr>';
-        return;
-      }
-
-      filtered.forEach(b => {
-        const row = document.createElement("tr");
-
-        row.innerHTML = `
-          <td>${b.date}</td>
-          <td>${b.time}</td>
-          <td>${b.email}</td>
-          <td>${b.phone || ""}</td>
-          <td class="col-remove">
-            <button class="btn-delete" data-id="${b.id}">X</button>
-          </td>
-        `;
-
-        row.addEventListener("click", ev => {
-          if (ev.target.matches(".btn-delete")) return;
-          showPopup(b);
-        });
-
-        tableBody.appendChild(row);
-      });
-
-      document.querySelectorAll(".btn-delete").forEach(btn => {
-        btn.addEventListener("click", async e => {
-          e.stopPropagation();
-          await deleteBooking(btn.dataset.id);
-        });
-      });
     }
 
-    function showPopup(b) {
-      document.getElementById("popupTitle").textContent = "Bokningsdetaljer";
-      document.getElementById("popupText").innerHTML = `
-        <b>Datum:</b> ${b.date}<br>
-        <b>Tid:</b> ${b.time}<br>
-        <b>Email:</b> ${b.email}<br>
-        <b>Telefon:</b> ${b.phone || "-"}<br>
-      `;
-      document.getElementById("popupBg").style.display = "flex";
+    function deleteBooking(index) {
+        let bookings = JSON.parse(localStorage.getItem("bookings")) || [];
+        bookings.splice(index, 1);
+        localStorage.setItem("bookings", JSON.stringify(bookings));
+        location.reload();
     }
-
-    function closePopup() {
-      document.getElementById("popupBg").style.display = "none";
-    }
-    window.closePopup = closePopup;
-
-    async function deleteBooking(id) {
-      if (!confirm("Är du säker på att du vill ta bort bokningen?")) return;
-      await fetch(`${API_BASE}/admin/delete/${id}`, { method: "DELETE" });
-      loadBookings();
-    }
-
-    searchInput.addEventListener("input", renderTable);
-    filterSelect.addEventListener("change", renderTable);
-    document.getElementById("refreshBtn").addEventListener("click", loadBookings);
 
     loadBookings();
-  </script>
+</script>
+
 </body>
 </html>
