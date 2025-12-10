@@ -1,282 +1,510 @@
 <!DOCTYPE html>
 <html lang="sv">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Välkommen till vår boking hemsida</title>
-  <title>Keratin Protein Malmö</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keratin Protein Behandling</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: Arial, sans-serif;
-    }
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-    /* 🔥 REN SVART BAKGRUND */
-    body {
-      background: #000;      /* <–– HELT SVART */
-      color: #fff;
-      text-align: center;
-      overflow-x: hidden;
-    }
+    <style>
+        body {
+            margin: 0;
+            font-family: "Poppins", sans-serif;
+            background: #000;
+            color: #fff;
+            scroll-behavior: smooth;
+        }
 
-    /* JULBANNER */
-    .xmas-banner {
-      background: #c40000;
-      padding: 12px;
-      color: #fff;
-      font-weight: bold;
-      font-size: 18px;
-      border-bottom: 2px solid gold;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
+        /* HEADER */
+        header {
+            position: absolute;
+            width: 100%;
+            top: 0;
+            padding: 25px 7vw;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 10;
+        }
 
-    /* NAVBAR */
-    nav {
-      background: rgba(0,0,0,0.9);
-      padding: 15px;
-      display: flex;
-      justify-content: center;
-      gap: 35px;
-      position: sticky;
-      top: 48px;
-      z-index: 90;
-      border-bottom: 1px solid #222;
-    }
+        nav {
+            display: flex;
+            gap: 30px;
+            font-size: 13px;
+            letter-spacing: 0.12em;
+        }
 
-    nav a {
-      color: white;
-      text-decoration: none;
-      font-size: 18px;
-    }
+        nav a {
+            color: white;
+            text-decoration: none;
+            opacity: 0.8;
+        }
 
-    nav a:hover {
-      color: gold;
-    }
+        nav a:hover { opacity: 1; }
 
-    /* SECTIONS */
-    .section {
-      padding: 60px 20px;
-    }
+        .nav-btn {
+            padding: 10px 25px;
+            border: 1px solid white;
+            border-radius: 30px;
+        }
 
-    .section-title {
-      font-size: 36px;
-      margin-bottom: 20px;
-      color: gold;
-    }
+        /* HERO */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 160px 7vw;
+            background:
+                linear-gradient(90deg, rgba(0,0,0,0.92), rgba(0,0,0,0.4)),
+                url('https://i.postimg.cc/wT80jx9L/Screenshot-2025-12-10-210910.png') right/cover no-repeat;
+        }
 
-    /* HERO */
-    .hero-logo {
-      width: 180px;
-      height: 180px;
-      border-radius: 50%;
-      background: #111;
-      border: 4px solid gold;
-      margin: 0 auto 20px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 70px;
-    }
+        .hero h1 {
+            font-size: 46px;
+            text-transform: uppercase;
+            font-weight: 700;
+            margin-bottom: 18px;
+        }
 
-    /* OFFERS */
-    .offer-box {
-      background: #111;
-      padding: 25px;
-      border-radius: 12px;
-      margin: 15px auto;
-      max-width: 350px;
-      border: 1px solid #333;
-    }
+        .hero p {
+            max-width: 450px;
+            margin-bottom: 25px;
+            line-height: 1.7;
+        }
 
-    .offer-label {
-      color: gold;
-      font-weight: bold;
-    }
+        .btn-primary {
+            background: white;
+            color: black;
+            padding: 12px 30px;
+            border-radius: 30px;
+            cursor: pointer;
+            border: none;
+            margin-right: 12px;
+        }
 
-    /* BOKNING */
-    .book-box {
-      background: #111;
-      padding: 25px;
-      border-radius: 15px;
-      max-width: 500px;
-      margin: auto;
-      border: 1px solid #333;
-    }
+        .btn-outline {
+            background: transparent;
+            border: 1px solid white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            color: white;
+            cursor: pointer;
+        }
 
-    select, input {
-      width: 100%;
-      padding: 12px;
-      margin: 8px 0;
-      border-radius: 8px;
-      border: 1px solid #444;
-      background: #222;
-      color: white;
-    }
+        /* BOOKING SECTION */
+        #booking {
+            padding: 80px 0;
+            background: #111;
+            display: flex;
+            justify-content: center;
+        }
 
-    button {
-      width: 100%;
-      padding: 14px;
-      margin-top: 10px;
-      background: gold;
-      border: none;
-      border-radius: 10px;
-      font-weight: bold;
-      font-size: 18px;
-    }
+        #booking .box {
+            width: 420px;
+        }
 
-    button:hover {
-      background: #ffd835;
-    }
+        #booking h2 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            border-left: 4px solid white;
+            padding-left: 12px;
+            text-transform: uppercase;
+        }
 
-    #doneMessage {
-      margin-top: 10px;
-      font-size: 16px;
-      font-weight: bold;
-    }
+        label {
+            display: block;
+            margin-bottom: 6px;
+            opacity: 0.8;
+        }
 
-    footer {
-      margin-top: 50px;
-      padding: 20px;
-      background: #111;
-      border-top: 1px solid #333;
-    }
-  </style>
+        select {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 16px;
+            border: none;
+        }
+    </style>
 </head>
 
 <body>
 
-<div class="xmas-banner">🎄 20% Julrabatt på Keratin protein behandling – Den slutar 30 december! 🎁</div>
+    <!-- HEADER -->
+    <header>
+        <div style="display:flex; align-items:center;">
+    <img src="https://i.postimg.cc/NjH4q5yS/Screenshot-2025-12-10-214949-removebg-preview.png" 
+         alt="Logo"
+         style="height:100px; width:auto; object-fit:contain;">
+</div>
 
-<nav>
-  <a href="#hero">Hem</a>
-  <a href="#offers">Tjänster</a>
-  <a href="#book">Boka</a>
-  <a href="#contact">Kontakt</a>
-</nav>
 
-<!---------------- HERO ---------------->
-<section class="section" id="hero">
-  <div class="hero-logo">💇‍♀️</div>
+        <nav>
+            <a href="#">HEM</a>
+            <a href="#booking">BEHANDLING</a>
+            <a href="#">PRISER</a>
+            <a href="#">KONTAKT</a>
+            <a href="#booking" class="nav-btn">BOKA TID</a>
+        </nav>
+    </header>
 
-  <h1 style="color:gold; font-size:38px;">Keratin Queen Malmö</h1>
-  <p>Permanent keratin- & proteinbehandling för rakt, glansigt och friskt hår.</p>
+    <!-- HERO -->
+    <section class="hero">
+        <div>
+            <p style="letter-spacing:0.25em; font-size:12px; opacity:0.8;">MED KERATIN PROTEIN BEHANDLING</p>
+
+            <h1>GÖR DITT HÅR<br>SILKESLENT & STARKT</h1>
+
+            <p>
+                Keratin Protein Behandling för dig som vill ha ett jämnt, glansigt och mer lättstylat hår.
+                Vår behandling minskar frizz, stärker håret och ger långvarig glans.
+            </p>
+
+            <button class="btn-primary" onclick="document.getElementById('booking').scrollIntoView({behavior:'smooth'})">
+                Boka tid nu →
+            </button>
+
+            <button class="btn-outline" onclick="window.location.href='behandling.html'">
+    Läs mer om behandlingen
+</button>
+
+    </section>
+<!-- TJÄNSTER SECTION -->
+<section id="tjanster" style="padding:90px 7vw; background:#f8f6f3; color:#222;">
+
+    <div style="text-align:center; margin-bottom:40px;">
+        <p style="letter-spacing:0.25em; font-size:13px; opacity:0.6; text-transform:uppercase;">
+            Professionella tjänster
+        </p>
+
+        <h2 style="font-size:34px; text-transform:uppercase; font-weight:700;">
+            Våra bästa tjänster<br>som vi erbjuder dig
+        </h2>
+
+        <p style="max-width:550px; margin:10px auto; opacity:0.7;">
+            Oavsett om du vill fräscha upp frisyren, ge håret nytt liv med keratin,
+            eller färga håret i en ny stil – vi har något som passar dig.
+        </p>
+    </div>
+
+    <div style="display:flex; gap:30px; justify-content:center; flex-wrap:wrap;">
+
+        <!-- Klippning -->
+        <div style="
+            width:320px; 
+            background:white; 
+            padding:35px; 
+            border-radius:14px;
+            box-shadow:0 6px 20px rgba(0,0,0,0.08);
+            text-align:center;">
+            
+            <div style="
+    width:90px;
+    height:90px;
+    border-radius:50%;
+    background:#faf5f0;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    margin:0 auto 20px;
+">
+    <img src="https://i.postimg.cc/qBQP5ZyT/Screenshot-2025-12-10-221650-removebg-preview.png"
+         alt="Hårfärgning ikon"
+         style="width:58px; height:58px; object-fit:contain;">
+</div>
+
+
+            <h3 style="font-size:20px; font-weight:700;">Klippning</h3>
+            <p style="opacity:0.7; margin-top:8px;">
+                Klassisk eller modern klippning anpassad efter din stil
+                och vardag. Alltid med noggrant och professionellt avslut.
+            </p>
+        </div>
+
+        <!-- Keratinbehandling -->
+        <div style="
+            width:320px;
+            background:white;
+            padding:35px;
+            border-radius:14px;
+            box-shadow:0 6px 20px rgba(0,0,0,0.08);
+            text-align:center;">
+            
+            <div style="
+    width:65px; 
+    height:65px; 
+    border-radius:50%; 
+    background:#faf5f0; 
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    margin:0 auto 20px;">
+
+    <img src="https://i.postimg.cc/JnNTZt3S/hair-salon-logo-gold-png.webp"
+         alt="logo"
+         style="width:65px; height:65px; object-fit:contain;">
+</div>
+
+
+            <h3 style="font-size:20px; font-weight:700;">Keratinbehandling</h3>
+            <p style="opacity:0.7; margin-top:8px;">
+                En djupverkande behandling som gör ditt hår silkeslent,
+                glansigt och frissfritt. Tar ca <strong>4 timmar</strong> och
+                ger långvarigt resultat.
+            </p>
+        </div>
+
+        <!-- Hårfärgning -->
+        <div style="
+            width:320px;
+            background:white;
+            padding:35px;
+            border-radius:14px;
+            box-shadow:0 6px 20px rgba(0,0,0,0.08);
+            text-align:center;">
+            
+            <div style="
+    width:90px;
+    height:90px;
+    border-radius:50%;
+    background:#faf5f0;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    margin:0 auto 20px;
+">
+    <img src="https://i.postimg.cc/1XHsCmSM/Screenshot-2025-12-10-221530-removebg-preview.png"
+         alt="Hårfärgning ikon"
+         style="width:55px; height:55px; object-fit:contain;">
+</div>
+
+
+            <h3 style="font-size:20px; font-weight:700;">Hårfärgning</h3>
+            <p style="opacity:0.7; margin-top:8px;">
+                Professionell hårfärgning i valfri stil – från naturliga toner
+                till kreativa färger. Vi hjälper dig att hitta rätt färg för dig.
+            </p>
+        </div>
+
+    </div>
+
 </section>
 
-<!---------------- ERBJUDANDEN ---------------->
-<section class="section" id="offers">
-  <h2 class="section-title">Erbjudanden</h2>
+    <!-- BOOKING -->
+    <section id="booking" style="padding:90px 7vw; background:#111; color:white; display:flex; justify-content:center; gap:60px; align-items:flex-start;">
 
-  <div class="offer-box">
-    <p class="offer-label">JULRABATT 20%</p>
-    <p>Keratin protein behandling</p>
-  </div>
+    <!-- BOKNINGSMODUL (vänster) -->
+    <div style="width:420px;">
+        <h2 style="font-size:28px; margin-bottom:25px; text-transform:uppercase; border-left:4px solid white; padding-left:12px;">
+            Boka Keratinbehandling
+        </h2>
 
-  <div class="offer-box">
-    <p class="offer-label">ERBJUDANDEN</p>
-    <p>Klippning</p>
-  </div>
+        <!-- MÅNAD -->
+        <label>Månad:</label>
+        <select id="monthSelect" style="padding:12px; width:100%; border-radius:8px; font-size:16px;">
+            <option value="">Välj månad...</option>
+        </select>
 
-  <div class="offer-box">
-    <p class="offer-label">ERBJUDANDEN</p>
-    <p>Färgning, toning och slingor</p>
-  </div>
+        <!-- DAG -->
+        <label style="margin-top:20px;">Dag:</label>
+        <select id="daySelect" style="padding:12px; width:100%; border-radius:8px; font-size:16px;">
+            <option value="">Välj dag...</option>
+        </select>
+
+        <!-- TID -->
+        <label style="margin-top:20px;">Tid:</label>
+        <select id="timeSelect" style="padding:12px; width:100%; border-radius:8px; font-size:16px;">
+            <option value="">Välj tid...</option>
+        </select>
+
+        <!-- TELEFON -->
+        <label style="margin-top:20px;">Telefonnummer:</label>
+        <input type="text" id="phone" placeholder="070 000 00 00"
+               style="padding:12px; width:100%; border-radius:8px; font-size:16px;">
+
+        <!-- EMAIL -->
+        <label style="margin-top:20px;">Gmail:</label>
+        <input type="email" id="email" placeholder="dinmail@gmail.com"
+               style="padding:12px; width:100%; border-radius:8px; font-size:16px;">
+
+        <!-- BOKA KNAPP -->
+        <button onclick="submitBooking()" 
+            style="
+                margin-top:30px; width:100%; padding:14px; background:white;
+                color:black; font-size:16px; border:none; border-radius:8px;
+                cursor:pointer; font-weight:600;">
+            Boka nu →
+        </button>
+    </div>
+
+
+    <!-- INFOSEKTION (höger) -->
+    <div style="max-width:450px; line-height:1.8;">
+
+        <h2 style="font-size:28px; margin-bottom:15px; text-transform:uppercase; border-left:4px solid white; padding-left:12px;">
+            Kontakta oss
+        </h2>
+
+        <p style="opacity:0.8;">
+            Vi erbjuder professionella hårbehandlingar med fokus på kvalitet och kundnöjdhet.
+            Oavsett om du behöver keratinbehandling, färgning eller klippning så finns vi här
+            för att ge dig bästa möjliga resultat.
+        </p>
+
+        <div style="margin-top:25px;">
+            <p><strong>📞 Telefon:</strong> 070 000 00 00</p>
+            <p><strong>📧 Email:</strong> claudia.manuka@gmail.com</p>
+            <p><strong>📍 Adress:</strong> Malmö, Sverige</p>
+        </div>
+
+        <h3 style="margin-top:25px; text-transform:uppercase; font-size:20px;">Öppettider</h3>
+        <p style="opacity:0.8;">
+            Mån – Fre: 10:00 – 21:00<br>
+            Lör – Sön: Stängt
+        </p>
+
+    </div>
+
 </section>
 
-<!---------------- BOKNING ---------------->
-<section class="section" id="book">
-  <h2 class="section-title">Boka din behandling</h2>
 
-  <div class="book-box">
+          
+    <!-- SCRIPT -->
+    <script>
+        const monthSelect = document.getElementById("monthSelect");
+        const daySelect = document.getElementById("daySelect");
+        const timeSelect = document.getElementById("timeSelect");
 
-    <label>Månad</label>
-    <select id="month">
-        <option value="">Välj månad</option>
-        <option value="1">Januari</option>
-        <option value="2">Februari</option>
-        <option value="3">Mars</option>
-        <option value="4">April</option>
-        <option value="5">Maj</option>
-        <option value="6">Juni</option>
-        <option value="7">Juli</option>
-        <option value="8">Augusti</option>
-        <option value="9">September</option>
-        <option value="10">Oktober</option>
-        <option value="11">November</option>
-        <option value="12">December</option>
-    </select>
+        // MONTHS + DAYS
+        const months = [
+            { name: "Januari", days: 31 },
+            { name: "Februari", days: 29 },
+            { name: "Mars", days: 31 },
+            { name: "April", days: 30 },
+            { name: "Maj", days: 31 },
+            { name: "Juni", days: 30 },
+            { name: "Juli", days: 31 },
+            { name: "Augusti", days: 31 },
+            { name: "September", days: 30 },
+            { name: "Oktober", days: 31 },
+            { name: "November", days: 30 },
+            { name: "December", days: 31 }
+        ];
 
-    <label>Dag</label>
-    <select id="day">
-        <option value="">Välj dag</option>
-    </select>
+        // Fill month menu
+        months.forEach((m, i) => {
+            let opt = document.createElement("option");
+            opt.value = i;
+            opt.textContent = m.name;
+            monthSelect.appendChild(opt);
+        });
 
-    <label>Tid</label>
-    <select id="start">
-        <option value="">Välj tid</option>
-    </select>
+        // When month selected → fill days
+        monthSelect.addEventListener("change", () => {
+            daySelect.innerHTML = '<option value="">Välj dag...</option>';
+            if (monthSelect.value === "") return;
 
-    <label>E-mail</label>
-    <input id="customerEmail" type="email" placeholder="Skriv din e-mail">
+            let numDays = months[monthSelect.value].days;
+            for (let d = 1; d <= numDays; d++) {
+                let opt = document.createElement("option");
+                opt.value = d;
+                opt.textContent = d;
+                daySelect.appendChild(opt);
+            }
+        });
 
-    <label>Telefonnummer</label>
-    <input id="customerPhone" type="tel" placeholder="Skriv ditt nummer">
+        // When day is selected → fill times
+        daySelect.addEventListener("change", generateTimes);
 
-    <button id="finishBtn">Boka klart</button>
-    <p id="doneMessage"></p>
+        function generateTimes() {
+            timeSelect.innerHTML = '<option value="">Välj tid...</option>';
 
-  </div>
-</section>
+            const openTime = 10;
+            const closeTime = 21;
+            const slotDuration = 4;
+            const breakMinutes = 30;
 
+            let start = openTime * 60;
+            let end = closeTime * 60;
 
-<footer>
-  © <span id="year"></span> Keratin Queen Malmö
-</footer>
+            while (start + slotDuration * 60 <= end) {
+                let s = minutesToTime(start);
+                let e = minutesToTime(start + slotDuration * 60);
 
+                let option = document.createElement("option");
+                option.value = `${s}-${e}`;
+                option.textContent = `${s} – ${e}`;
+                timeSelect.appendChild(option);
+
+                start += slotDuration * 60 + breakMinutes;
+            }
+        }
+
+        function minutesToTime(mins) {
+            let h = Math.floor(mins / 60);
+            let m = mins % 60;
+            return (h < 10 ? "0" + h : h) + ":" + (m === 0 ? "00" : m);
+        }
+    </script>
 <script>
-  document.getElementById("year").textContent = new Date().getFullYear();
+function submitBooking() {
+    let month = document.getElementById("monthSelect").value;
+    let day = document.getElementById("daySelect").value;
+    let time = document.getElementById("timeSelect").value;
+    let phone = document.getElementById("phone").value.trim();
+    let email = document.getElementById("email").value.trim();
 
-  // Fyll dagar
-  const daySelect = document.getElementById("day");
-  for (let i = 1; i <= 31; i++) {
-    const formatted = i < 10 ? "0" + i : i;
-    daySelect.innerHTML += `<option value="${formatted}">${formatted}</option>`;
-  }
+    // Kontroll av att fält är ifyllda
+    if (!month || !day || !time || !phone || !email) {
+        alert("Fyll i alla fält innan du bokar.");
+        return;
+    }
 
-  // Fyll tider
-  function loadTimes() {
-    const month = document.getElementById("month").value;
-    const day = document.getElementById("day").value;
-    const timeSelect = document.getElementById("start");
+    // Visa bekräftelse
+    alert(
+        "Tack! Din bokning har skickats.\n\n" +
+        "Datum: " + day + " " + months[month].name + "\n" +
+        "Tid: " + time + "\n" +
+        "Telefon: " + phone + "\n" +
+        "Email: " + email
+    );
+}
+</script>
+<script>
+function submitBooking() {
+    let monthIndex = document.getElementById("monthSelect").value;
+    let month = months[monthIndex]?.name;
+    let day = document.getElementById("daySelect").value;
+    let time = document.getElementById("timeSelect").value;
+    let phone = document.getElementById("phone").value.trim();
+    let email = document.getElementById("email").value.trim();
 
-    timeSelect.innerHTML = `<option value="">Välj tid</option>`;
-    if (!month || !day) return;
+    if (!monthIndex || !day || !time || !phone || !email) {
+        alert("Fyll i alla fält innan du bokar.");
+        return;
+    }
 
-    ["10:00", "14:00", "17:00"].forEach(t => {
-      timeSelect.innerHTML += `<option value="${t}">${t}</option>`;
-    });
-  }
+    let booking = {
+        month: month,
+        day: day,
+        time: time,
+        phone: phone,
+        email: email
+    };
 
-  document.getElementById("month").addEventListener("change", loadTimes);
-  document.getElementById("day").addEventListener("change", loadTimes);
+    let bookings = JSON.parse(localStorage.getItem("bookings")) || [];
+    bookings.push(booking);
+    localStorage.setItem("bookings", JSON.stringify(bookings));
 
-  // Bokning
-  document.getElementById("finishBtn").addEventListener("click", () => {
-    const msg = document.getElementById("doneMessage");
+    alert("Tack! Din bokning är sparad.");
 
-    msg.textContent = "✔ Bokning skickad!";
-    msg.style.color = "lightgreen";
-  });
+    // Rensa fälten om du vill
+    document.getElementById("daySelect").value = "";
+    document.getElementById("timeSelect").innerHTML = '<option value="">Välj tid...</option>';
+    document.getElementById("phone").value = "";
+    document.getElementById("email").value = "";
+}
 </script>
 
 </body>
 </html>
-
-
-
-
-
