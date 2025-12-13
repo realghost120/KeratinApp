@@ -215,6 +215,7 @@
 }
 
     </style>
+
 </head>
 
 <body>
@@ -231,8 +232,7 @@
         <nav>
             <a href="#">HEM</a>
             <a href="#booking">BEHANDLING</a>
-            <a href="#">PRISER</a>
-            <a href="#">KONTAKT</a>
+             <a href="#priser">PRISLISTA</a>
             <a href="#booking" class="nav-btn">BOKA TID</a>
         </nav>
     </header>
@@ -253,11 +253,33 @@
                 Boka tid nu →
             </button>
 
-            <button class="btn-outline" onclick="window.location.href='behandling.html'">
+         <button class="btn-outline" onclick="window.location.href='behandling.html'">
     Läs mer om behandlingen
 </button>
 
     </section>
+
+ <!-- PRISLISTA -->
+<section 
+  id="priser" 
+  class="price-section"
+  style="
+    padding:90px 7vw;
+    background:#f8f6f3;
+    color:#222;
+    margin-bottom:0px;
+  "
+>
+  <h2 style="text-align:center;">Prislista</h2>
+
+  <div class="price-image" style="max-width:420px; margin:30px auto;">
+    <img 
+      src="https://i.postimg.cc/yNrvhf3F/Screenshot-2025-12-13-230712.png"
+      alt="Prislista Keratinbehandling"
+      style="width:100%; border-radius:12px; box-shadow:0 10px 30px rgba(0,0,0,0.2);">
+  </div>
+</section>
+
 <!-- TJÄNSTER SECTION -->
 <section id="tjanster" style="padding:90px 7vw; background:#f8f6f3; color:#222;">
 
@@ -276,108 +298,108 @@
         </p>
     </div>
 
-    <div style="display:flex; gap:30px; justify-content:center; flex-wrap:wrap;">
+  <!-- KLIPPNING (ÖVERST) -->
+  <div style="display:flex; justify-content:center; margin-bottom:40px;">
+    <div style="
+      width:320px; 
+      background:white; 
+      padding:35px; 
+      border-radius:14px;
+      box-shadow:0 6px 20px rgba(0,0,0,0.08);
+      text-align:center;
+    ">
+      <div style="
+        width:90px;
+        height:90px;
+        border-radius:50%;
+        background:#faf5f0;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        margin:0 auto 20px;
+      ">
+        <img src="https://i.postimg.cc/qBQP5ZyT/Screenshot-2025-12-10-221650-removebg-preview.png"
+             alt="Klippning ikon"
+             style="width:58px; height:58px; object-fit:contain;">
+      </div>
 
-        <!-- Klippning -->
-        <div style="
-            width:320px; 
-            background:white; 
-            padding:35px; 
-            border-radius:14px;
-            box-shadow:0 6px 20px rgba(0,0,0,0.08);
-            text-align:center;">
-            
-            <div style="
-    width:90px;
-    height:90px;
-    border-radius:50%;
-    background:#faf5f0;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    margin:0 auto 20px;
-">
-    <img src="https://i.postimg.cc/qBQP5ZyT/Screenshot-2025-12-10-221650-removebg-preview.png"
-         alt="Hårfärgning ikon"
-         style="width:58px; height:58px; object-fit:contain;">
-</div>
+      <h3 style="font-size:20px; font-weight:700;">Klippning</h3>
+      <p style="opacity:0.7; margin-top:8px;">
+        Klassisk eller modern klippning anpassad efter din stil
+        och vardag. Alltid med noggrant och professionellt avslut.
+      </p>
+    </div>
+  </div>
 
+  <!-- DE TVÅ ANDRA (UNDER) -->
+  <div style="display:flex; gap:30px; justify-content:center; flex-wrap:wrap;">
 
-            <h3 style="font-size:20px; font-weight:700;">Klippning</h3>
-            <p style="opacity:0.7; margin-top:8px;">
-                Klassisk eller modern klippning anpassad efter din stil
-                och vardag. Alltid med noggrant och professionellt avslut.
-            </p>
-        </div>
+    <!-- Keratinbehandling -->
+    <div style="
+      width:320px;
+      background:white;
+      padding:35px;
+      border-radius:14px;
+      box-shadow:0 6px 20px rgba(0,0,0,0.08);
+      text-align:center;
+    ">
+      <div style="
+        width:65px; 
+        height:65px; 
+        border-radius:50%; 
+        background:#faf5f0; 
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        margin:0 auto 20px;
+      ">
+        <img src="https://i.postimg.cc/JnNTZt3S/hair-salon-logo-gold-png.webp"
+             alt="Keratin ikon"
+             style="width:65px; height:65px; object-fit:contain;">
+      </div>
 
-        <!-- Keratinbehandling -->
-        <div style="
-            width:320px;
-            background:white;
-            padding:35px;
-            border-radius:14px;
-            box-shadow:0 6px 20px rgba(0,0,0,0.08);
-            text-align:center;">
-            
-            <div style="
-    width:65px; 
-    height:65px; 
-    border-radius:50%; 
-    background:#faf5f0; 
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    margin:0 auto 20px;">
-
-    <img src="https://i.postimg.cc/JnNTZt3S/hair-salon-logo-gold-png.webp"
-         alt="logo"
-         style="width:65px; height:65px; object-fit:contain;">
-</div>
-
-
-            <h3 style="font-size:20px; font-weight:700;">Keratinbehandling</h3>
-            <p style="opacity:0.7; margin-top:8px;">
-                En djupverkande behandling som gör ditt hår silkeslent,
-                glansigt och frissfritt. Tar ca <strong>4 timmar</strong> och
-                ger långvarigt resultat.
-            </p>
-        </div>
-
-        <!-- Hårfärgning -->
-        <div style="
-            width:320px;
-            background:white;
-            padding:35px;
-            border-radius:14px;
-            box-shadow:0 6px 20px rgba(0,0,0,0.08);
-            text-align:center;">
-            
-            <div style="
-    width:90px;
-    height:90px;
-    border-radius:50%;
-    background:#faf5f0;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    margin:0 auto 20px;
-">
-    <img src="https://i.postimg.cc/1XHsCmSM/Screenshot-2025-12-10-221530-removebg-preview.png"
-         alt="Hårfärgning ikon"
-         style="width:55px; height:55px; object-fit:contain;">
-</div>
-
-
-            <h3 style="font-size:20px; font-weight:700;">Hårfärgning</h3>
-            <p style="opacity:0.7; margin-top:8px;">
-                Professionell hårfärgning i valfri stil – från naturliga toner
-                till kreativa färger. Vi hjälper dig att hitta rätt färg för dig.
-            </p>
-        </div>
-
+      <h3 style="font-size:20px; font-weight:700;">Keratinbehandling</h3>
+      <p style="opacity:0.7; margin-top:8px;">
+        En djupverkande behandling som gör ditt hår silkeslent,
+        glansigt och frissfritt. Tar ca <strong>4 timmar</strong> och
+        ger långvarigt resultat.
+      </p>
     </div>
 
+    <!-- Hårfärgning -->
+    <div style="
+      width:320px;
+      background:white;
+      padding:35px;
+      border-radius:14px;
+      box-shadow:0 6px 20px rgba(0,0,0,0.08);
+      text-align:center;
+    ">
+      <div style="
+        width:90px;
+        height:90px;
+        border-radius:50%;
+        background:#faf5f0;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        margin:0 auto 20px;
+      ">
+        <img src="https://i.postimg.cc/1XHsCmSM/Screenshot-2025-12-10-221530-removebg-preview.png"
+             alt="Hårfärgning ikon"
+             style="width:55px; height:55px; object-fit:contain;">
+      </div>
+
+      <h3 style="font-size:20px; font-weight:700;">Hårfärgning</h3>
+      <p style="opacity:0.7; margin-top:8px;">
+        Professionell hårfärgning i valfri stil – från naturliga toner
+        till kreativa färger. Vi hjälper dig att hitta rätt färg för dig.
+      </p>
+    </div>
+
+  </div>
 </section>
+
 
     <!-- BOOKING -->
     <section id="booking" style="padding:90px 7vw; background:#111; color:white; display:flex; justify-content:center; gap:60px; align-items:flex-start;">
@@ -439,17 +461,19 @@
             Oavsett om du behöver keratinbehandling, färgning eller klippning så finns vi här
             för att ge dig bästa möjliga resultat.
         </p>
+<p style="opacity:0.8;">Om du har frågor eller vill veta mer om våra tjänster ring oss gärna! 
+                       Vi ser fram emot att hjälpa dig
+                       välkommen till vår salong </p>
 
         <div style="margin-top:25px;">
-            <p><strong>📞 Telefon:</strong> 070 000 00 00</p>
-            <p><strong>📧 Email:</strong> claudia.manuka@gmail.com</p>
+            <p><strong>📞 Telefon:</strong> +46 76 429 70 04 </p>
             <p><strong>📍 Adress:</strong> Malmö, Sverige</p>
         </div>
 
         <h3 style="margin-top:25px; text-transform:uppercase; font-size:20px;">Öppettider</h3>
         <p style="opacity:0.8;">
-            Mån – Fre: 10:00 – 21:00<br>
-            Lör – Sön: Stängt
+            Mån – Fre: 16:00 – 20:00<br>
+            Lör – Sön: 10:00 - 21:00
         </p>
 
     </div>
@@ -597,4 +621,3 @@ function submitBooking() {
 
 </body>
 </html>
-
