@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Panel – Keratin Bokningar</title>
+    <title>Keratinbehandling – Mer information</title>
 
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
@@ -13,110 +13,97 @@
             background: #111;
             color: white;
             font-family: "Poppins", sans-serif;
+            padding: 40px 7vw;
         }
 
-        .container {
-            width: 600px;
-            margin: 60px auto;
-            background: #1a1a1a;
-            padding: 30px;
+        .content {
+            display: flex;
+            gap: 50px;
+            align-items: flex-start;
+            justify-content: center;
+        }
+
+        .text-box {
+            max-width: 600px;
+            line-height: 1.8;
+        }
+
+        .text-box h1 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        .text-box p {
+            opacity: 0.85;
+            margin-bottom: 18px;
+        }
+
+        .image-box img {
+            width: 420px;
             border-radius: 12px;
+            object-fit: cover;
         }
 
-        h2 {
-            font-size: 28px;
-            border-left: 4px solid white;
-            padding-left: 12px;
-            text-transform: uppercase;
-            margin-bottom: 25px;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 15px;
-        }
-
-        table th, table td {
-            padding: 12px;
-            border-bottom: 1px solid #333;
-            text-align: left;
-        }
-
-        table th {
-            background: #222;
-        }
-
-        button {
-            padding: 6px 14px;
-            border: none;
-            border-radius: 6px;
+        .back-btn {
+            margin-top: 40px;
+            display: inline-block;
+            padding: 12px 22px;
+            background: white;
+            color: black;
+            border-radius: 8px;
+            font-weight: 600;
             cursor: pointer;
-            background: #e74c3c;
-            color: white;
         }
 
-        .no-bookings {
-            margin-top: 20px;
-            opacity: 0.7;
+        /* Mobilvänlig layout */
+        @media (max-width: 900px) {
+            .content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .image-box img {
+                width: 100%;
+                margin-top: 20px;
+            }
         }
     </style>
-
 </head>
+
 <body>
 
-<div class="container">
-    <h2>Admin Panel – Bokningar</h2>
+    <div class="content">
 
-    <table id="bookingTable">
-        <tr>
-            <th>Månad</th>
-            <th>Dag</th>
-            <th>Tid</th>
-            <th>Telefon</th>
-            <th>Email</th>
-            <th>Ta bort</th>
-        </tr>
-    </table>
+        <!-- TEXTEN (vänster) -->
+        <div class="text-box">
+            <h1>Mer om Keratinbehandling</h1>
 
-    <p id="emptyMessage" class="no-bookings">Inga bokningar ännu...</p>
-</div>
+            <p>
+                Har du skadat hår av värme, färgning eller andra faktorer?
+                Är du trött på att platta ditt hår varje dag, och ändå känns det torrt, slitet och livlöst?
+            </p>
 
-<script>
-    function loadBookings() {
-        let bookings = JSON.parse(localStorage.getItem("bookings")) || [];
+            <p>
+                Nu har vi lösningen – inte för 3 månader, inte för 6 månader…
+                utan permanent resultat!     
+            </p>
 
-        let table = document.getElementById("bookingTable");
-        let emptyMessage = document.getElementById("emptyMessage");
+            <p>
+                Vår keratinbehandling är betygsatt med 🌟🌟🌟🌟🌟 och kommer direkt från Brasilien.
+                Den innehåller keratin, protein, kollagen och vitamin E – 100% organiskt och kliniskt testat.
+            </p>
 
-        // Visa eller göm "inga bokningar"
-        emptyMessage.style.display = bookings.length === 0 ? "block" : "none";
+            <div class="back-btn" onclick="window.location.href='index.html'">
+                ← Tillbaka till startsidan
+            </div>
+        </div>
 
-        bookings.forEach((b, index) => {
-            let row = document.createElement("tr");
+        <!-- BILDEN (höger) -->
+        <div class="image-box">
+            <img src="https://i.postimg.cc/yYbDhjN7/Screenshot-2025-12-10-220229.png" alt="Keratin Bild">
+        </div>
 
-            row.innerHTML = `
-                <td>${b.month}</td>
-                <td>${b.day}</td>
-                <td>${b.time}</td>
-                <td>${b.phone}</td>
-                <td>${b.email}</td>
-                <td><button onclick="deleteBooking(${index})">X</button></td>
-            `;
-
-            table.appendChild(row);
-        });
-    }
-
-    function deleteBooking(index) {
-        let bookings = JSON.parse(localStorage.getItem("bookings")) || [];
-        bookings.splice(index, 1);
-        localStorage.setItem("bookings", JSON.stringify(bookings));
-        location.reload();
-    }
-
-    loadBookings();
-</script>
+    </div>
 
 </body>
 </html>
