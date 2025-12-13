@@ -125,6 +125,95 @@
             font-size: 16px;
             border: none;
         }
+    /* =========================
+   MOBILANPASSNING
+   ========================= */
+@media (max-width: 768px) {
+
+  header {
+    padding: 20px 5vw;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  header img {
+    height: 70px !important;
+  }
+
+  nav {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
+    font-size: 12px;
+  }
+
+  .nav-btn {
+    padding: 8px 18px;
+  }
+
+  .hero {
+    padding: 140px 6vw 80px;
+    background-position: center;
+  }
+
+  .hero h1 {
+    font-size: 32px;
+    line-height: 1.2;
+  }
+
+  .hero p {
+    font-size: 14px;
+  }
+
+  .btn-primary,
+  .btn-outline {
+    display: block;
+    width: 100%;
+    margin-bottom: 12px;
+    text-align: center;
+  }
+
+  #tjanster {
+    padding: 70px 6vw;
+  }
+
+  #tjanster h2 {
+    font-size: 26px;
+  }
+
+  #booking {
+    flex-direction: column;
+    padding: 70px 6vw;
+    gap: 50px;
+  }
+
+  #booking > div {
+    width: 100% !important;
+  }
+
+  input,
+  select,
+  button {
+    font-size: 16px;
+  }
+}
+
+/* EXTRA SMÅ MOBILER */
+@media (max-width: 480px) {
+
+  .hero h1 {
+    font-size: 28px;
+  }
+
+  header img {
+    height: 60px !important;
+  }
+
+  nav {
+    gap: 12px;
+  }
+}
+
     </style>
 </head>
 
@@ -508,3 +597,4 @@ function submitBooking() {
 
 </body>
 </html>
+
